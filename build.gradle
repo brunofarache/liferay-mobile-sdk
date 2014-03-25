@@ -14,7 +14,7 @@ subprojects {
 	}
 }
 
-configure(subprojects.findAll { it.name != 'ios' }) {
+configure(subprojects.findAll { (it.name != 'ios') && (it.name != 'javascript') }) {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'

@@ -1,0 +1,44 @@
+#set ($actions = $discovery.actions)
+#set ($context = $discovery.context)
+
+function $className() {
+}
+
+#foreach ($action in $actions)
+
+	##n
+
+	#set ($parameters = $action.parameters)
+	#set ($arguments = "")
+
+	#foreach ($parameter in $parameters)
+		#set ($parameterName = $parameter.name)
+		#set ($arguments = "${arguments}${parameterName}")
+
+		#if ($foreach.hasNext)
+			#set ($arguments = "$arguments, ")
+		#end
+	#end
+
+	${className}.prototype.${languageUtil.getMethodName(${action.path})} = function(${arguments}) {
+
+	##t	return {
+	##t		${esc.q}${context}${action.path}${esc.q}: {
+
+	#foreach ($parameter in $parameters)
+		#set ($parameterName = $parameter.name)
+		#set ($value = "${esc.q}$parameterName${esc.q}: ${parameterName}")
+
+		#if ($foreach.hasNext)
+			#set ($value = "$value,")
+		#end
+
+		##t			$value
+	#end
+
+	##t		}
+	##t	};
+
+	};
+
+#end

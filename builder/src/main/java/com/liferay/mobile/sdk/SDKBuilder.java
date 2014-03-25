@@ -19,6 +19,7 @@ import com.liferay.mobile.sdk.http.Discovery;
 import com.liferay.mobile.sdk.http.DiscoveryResponseHandler;
 import com.liferay.mobile.sdk.http.HttpUtil;
 import com.liferay.mobile.sdk.ios.iOSBuilder;
+import com.liferay.mobile.sdk.javascript.JavascriptBuilder;
 import com.liferay.mobile.sdk.util.Validator;
 
 import java.util.HashMap;
@@ -36,6 +37,8 @@ public class SDKBuilder {
 	public static final String ANDROID = "android";
 
 	public static final String IOS = "ios";
+
+	public static final String JAVASCRIPT = "javascript";
 
 	public static void build(
 			String platform, String url, String context, String packageName,
@@ -59,6 +62,9 @@ public class SDKBuilder {
 		}
 		else if (platform.equals(IOS)) {
 			builder = new iOSBuilder();
+		}
+		else if (platform.equals(JAVASCRIPT)) {
+			builder = new JavascriptBuilder();
 		}
 
 		int version = HttpUtil.getPortalVersion(url);

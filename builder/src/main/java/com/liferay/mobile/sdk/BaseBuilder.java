@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import org.apache.velocity.VelocityContext;
+
 /**
  * @author Bruno Farache
  */
@@ -56,6 +58,27 @@ public abstract class BaseBuilder implements Builder {
 			discovery.setActions(entry.getValue());
 
 			build(discovery, packageName, version, entry.getKey(), destination);
+		}
+	}
+
+	protected void excludeMethods(VelocityContext context) {
+		String className = (String)context.get(CLASS_NAME);
+		Discovery discovery = (Discovery)context.get(DISCOVERY);
+
+		if (!className.equals("DDLRecordService")) {
+			return;
+		}
+
+		ArrayList<Action> actions = discovery.getActions();
+
+		for (Action action : actions) {
+			String path = action.getPath();
+
+			if (path.equals("/ddlrecord/add-record")) {
+				actions.remove(action);
+
+				break;
+			}
 		}
 	}
 
