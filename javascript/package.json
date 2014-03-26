@@ -1,0 +1,29 @@
+{
+	"name": "node-liferay",
+	"version": "0.1.0",
+	"description": "Liferay Node.js SDK",
+	"directories": {
+		"test": "test"
+	},
+	"dependencies": {	
+	},
+	"devDependencies": {
+		"should": "~3.1.4"
+	},
+	"scripts": {
+		"test": "mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/liferay/liferay-mobile-sdk"
+	},
+	"keywords": [
+		"liferay"
+	],
+	"author": "Bruno Farache",
+	"license": "LGPL 2.1",
+	"bugs": {
+		"url": "https://github.com/liferay/liferay-mobile-sdk/issues"
+	},
+	"homepage": "https://github.com/liferay/liferay-mobile-sdk"
+}
