@@ -42,3 +42,7 @@ function $className() {
 	};
 
 #end
+
+##n
+
+module.exports = $className;
