@@ -12,4 +12,5 @@ local.properties
 bin/
 build/
 classes/
+node_modules/
 out/
