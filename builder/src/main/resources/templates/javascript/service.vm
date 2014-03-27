@@ -20,7 +20,13 @@ function $className() {
 		#end
 	#end
 
-	${className}.prototype.${languageUtil.getMethodName(${action.path})} = function(${arguments}) {
+	#set ($collisions = "")
+
+	#if (${action.collisions} > 0)
+		#set ($collisions = ${action.collisions})
+	#end
+
+	${className}.prototype.${languageUtil.getMethodName(${action.path})}$collisions = function(${arguments}) {
 
 	##t	return {
 	##t		${esc.q}${context}${action.path}${esc.q}: {

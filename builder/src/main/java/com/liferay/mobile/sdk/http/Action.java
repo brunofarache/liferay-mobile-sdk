@@ -39,6 +39,10 @@ public class Action {
 		}
 	}
 
+	public int getCollisions() {
+		return _collisions;
+	}
+
 	public String getMethod() {
 		return _method;
 	}
@@ -53,6 +57,10 @@ public class Action {
 
 	public String getResponse() {
 		return _response;
+	}
+
+	public void setCollisions(int collisions) {
+		_collisions = collisions;
 	}
 
 	public void setMethod(String method) {
@@ -71,6 +79,7 @@ public class Action {
 		_response = response;
 	}
 
+	private int _collisions;
 	private String _method;
 	private ArrayList<Parameter> _parameters = new ArrayList<Parameter>();
 	private String _path;
