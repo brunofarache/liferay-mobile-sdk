@@ -75,7 +75,7 @@ BlogsEntryService.prototype.getGroupEntries = function(groupId, displayDate, sta
 	};
 };
 
-BlogsEntryService.prototype.getGroupEntries = function(groupId, status, start, end) {
+BlogsEntryService.prototype.getGroupEntries1 = function(groupId, status, start, end) {
 	return {
 		"/blogsentry/get-group-entries": {
 			"groupId": groupId,

@@ -34,7 +34,7 @@ MBThreadService.prototype.getGroupThreads = function(groupId, userId, modifiedDa
 	};
 };
 
-MBThreadService.prototype.getGroupThreads = function(groupId, userId, status, subscribed, start, end) {
+MBThreadService.prototype.getGroupThreads1 = function(groupId, userId, status, subscribed, start, end) {
 	return {
 		"/mbthread/get-group-threads": {
 			"groupId": groupId,
@@ -82,7 +82,7 @@ MBThreadService.prototype.getGroupThreadsCount = function(groupId, userId, modif
 	};
 };
 
-MBThreadService.prototype.getGroupThreadsCount = function(groupId, userId, status, subscribed) {
+MBThreadService.prototype.getGroupThreadsCount1 = function(groupId, userId, status, subscribed) {
 	return {
 		"/mbthread/get-group-threads-count": {
 			"groupId": groupId,

@@ -175,7 +175,7 @@ BookmarksEntryService.prototype.openEntry = function(entry) {
 	};
 };
 
-BookmarksEntryService.prototype.openEntry = function(entryId) {
+BookmarksEntryService.prototype.openEntry1 = function(entryId) {
 	return {
 		"/bookmarksentry/open-entry": {
 			"entryId": entryId

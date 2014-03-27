@@ -11,7 +11,7 @@ SocialActivityService.prototype.getActivities = function(className, start, end) 
 	};
 };
 
-SocialActivityService.prototype.getActivities = function(classNameId, start, end) {
+SocialActivityService.prototype.getActivities1 = function(classNameId, start, end) {
 	return {
 		"/socialactivity/get-activities": {
 			"classNameId": classNameId,
@@ -33,7 +33,7 @@ SocialActivityService.prototype.getActivities = function(mirrorActivityId, class
 	};
 };
 
-SocialActivityService.prototype.getActivities = function(mirrorActivityId, classNameId, classPK, start, end) {
+SocialActivityService.prototype.getActivities1 = function(mirrorActivityId, classNameId, classPK, start, end) {
 	return {
 		"/socialactivity/get-activities": {
 			"mirrorActivityId": mirrorActivityId,
@@ -53,7 +53,7 @@ SocialActivityService.prototype.getActivitiesCount = function(className) {
 	};
 };
 
-SocialActivityService.prototype.getActivitiesCount = function(classNameId) {
+SocialActivityService.prototype.getActivitiesCount1 = function(classNameId) {
 	return {
 		"/socialactivity/get-activities-count": {
 			"classNameId": classNameId
@@ -71,7 +71,7 @@ SocialActivityService.prototype.getActivitiesCount = function(mirrorActivityId, 
 	};
 };
 
-SocialActivityService.prototype.getActivitiesCount = function(mirrorActivityId, classNameId, classPK) {
+SocialActivityService.prototype.getActivitiesCount1 = function(mirrorActivityId, classNameId, classPK) {
 	return {
 		"/socialactivity/get-activities-count": {
 			"mirrorActivityId": mirrorActivityId,

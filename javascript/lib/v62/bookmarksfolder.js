@@ -165,7 +165,7 @@ BookmarksFolderService.prototype.getSubfolderIds = function(folderIds, groupId, 
 	};
 };
 
-BookmarksFolderService.prototype.getSubfolderIds = function(groupId, folderId, recurse) {
+BookmarksFolderService.prototype.getSubfolderIds1 = function(groupId, folderId, recurse) {
 	return {
 		"/bookmarksfolder/get-subfolder-ids": {
 			"groupId": groupId,

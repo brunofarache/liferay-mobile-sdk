@@ -14,7 +14,7 @@ MDRActionService.prototype.addAction = function(ruleGroupInstanceId, nameMap, de
 	};
 };
 
-MDRActionService.prototype.addAction = function(ruleGroupInstanceId, nameMap, descriptionMap, type, typeSettingsProperties, serviceContext) {
+MDRActionService.prototype.addAction1 = function(ruleGroupInstanceId, nameMap, descriptionMap, type, typeSettingsProperties, serviceContext) {
 	return {
 		"/mdraction/add-action": {
 			"ruleGroupInstanceId": ruleGroupInstanceId,
@@ -64,7 +64,7 @@ MDRActionService.prototype.updateAction = function(actionId, nameMap, descriptio
 	};
 };
 
-MDRActionService.prototype.updateAction = function(actionId, nameMap, descriptionMap, type, typeSettingsProperties, serviceContext) {
+MDRActionService.prototype.updateAction1 = function(actionId, nameMap, descriptionMap, type, typeSettingsProperties, serviceContext) {
 	return {
 		"/mdraction/update-action": {
 			"actionId": actionId,

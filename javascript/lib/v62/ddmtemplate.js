@@ -208,7 +208,7 @@ DDMTemplateService.prototype.search = function(companyId, groupId, classNameId, 
 	};
 };
 
-DDMTemplateService.prototype.search = function(companyId, groupIds, classNameIds, classPKs, keywords, type, mode, start, end, orderByComparator) {
+DDMTemplateService.prototype.search1 = function(companyId, groupIds, classNameIds, classPKs, keywords, type, mode, start, end, orderByComparator) {
 	return {
 		"/ddmtemplate/search": {
 			"companyId": companyId,
@@ -245,7 +245,7 @@ DDMTemplateService.prototype.search = function(companyId, groupId, classNameId, 
 	};
 };
 
-DDMTemplateService.prototype.search = function(companyId, groupIds, classNameIds, classPKs, name, description, type, mode, language, andOperator, start, end, orderByComparator) {
+DDMTemplateService.prototype.search1 = function(companyId, groupIds, classNameIds, classPKs, name, description, type, mode, language, andOperator, start, end, orderByComparator) {
 	return {
 		"/ddmtemplate/search": {
 			"companyId": companyId,
@@ -282,7 +282,7 @@ DDMTemplateService.prototype.searchCount = function(companyId, groupId, classNam
 	};
 };
 
-DDMTemplateService.prototype.searchCount = function(companyId, groupIds, classNameIds, classPKs, name, description, type, mode, language, andOperator) {
+DDMTemplateService.prototype.searchCount1 = function(companyId, groupIds, classNameIds, classPKs, name, description, type, mode, language, andOperator) {
 	return {
 		"/ddmtemplate/search-count": {
 			"companyId": companyId,
@@ -313,7 +313,7 @@ DDMTemplateService.prototype.searchCount = function(companyId, groupId, classNam
 	};
 };
 
-DDMTemplateService.prototype.searchCount = function(companyId, groupIds, classNameIds, classPKs, keywords, type, mode) {
+DDMTemplateService.prototype.searchCount1 = function(companyId, groupIds, classNameIds, classPKs, keywords, type, mode) {
 	return {
 		"/ddmtemplate/search-count": {
 			"companyId": companyId,

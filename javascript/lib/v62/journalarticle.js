@@ -170,7 +170,7 @@ JournalArticleService.prototype.getArticle = function(groupId, articleId, versio
 	};
 };
 
-JournalArticleService.prototype.getArticle = function(groupId, className, classPK) {
+JournalArticleService.prototype.getArticle1 = function(groupId, className, classPK) {
 	return {
 		"/journalarticle/get-article": {
 			"groupId": groupId,
@@ -412,7 +412,7 @@ JournalArticleService.prototype.getLatestArticle = function(groupId, articleId, 
 	};
 };
 
-JournalArticleService.prototype.getLatestArticle = function(groupId, className, classPK) {
+JournalArticleService.prototype.getLatestArticle1 = function(groupId, className, classPK) {
 	return {
 		"/journalarticle/get-latest-article": {
 			"groupId": groupId,
@@ -443,7 +443,7 @@ JournalArticleService.prototype.moveArticleFromTrash = function(groupId, article
 	};
 };
 
-JournalArticleService.prototype.moveArticleFromTrash = function(groupId, resourcePrimKey, newFolderId, serviceContext) {
+JournalArticleService.prototype.moveArticleFromTrash1 = function(groupId, resourcePrimKey, newFolderId, serviceContext) {
 	return {
 		"/journalarticle/move-article-from-trash": {
 			"groupId": groupId,
@@ -550,7 +550,7 @@ JournalArticleService.prototype.search = function(companyId, groupId, folderIds,
 	};
 };
 
-JournalArticleService.prototype.search = function(companyId, groupId, folderIds, classNameId, articleId, version, title, description, content, type, ddmStructureKeys, ddmTemplateKeys, displayDateGT, displayDateLT, status, reviewDate, andOperator, start, end, obc) {
+JournalArticleService.prototype.search1 = function(companyId, groupId, folderIds, classNameId, articleId, version, title, description, content, type, ddmStructureKeys, ddmTemplateKeys, displayDateGT, displayDateLT, status, reviewDate, andOperator, start, end, obc) {
 	return {
 		"/journalarticle/search": {
 			"companyId": companyId,
@@ -633,7 +633,7 @@ JournalArticleService.prototype.searchCount = function(companyId, groupId, folde
 	};
 };
 
-JournalArticleService.prototype.searchCount = function(companyId, groupId, folderIds, classNameId, articleId, version, title, description, content, type, ddmStructureKeys, ddmTemplateKeys, displayDateGT, displayDateLT, status, reviewDate, andOperator) {
+JournalArticleService.prototype.searchCount1 = function(companyId, groupId, folderIds, classNameId, articleId, version, title, description, content, type, ddmStructureKeys, ddmTemplateKeys, displayDateGT, displayDateLT, status, reviewDate, andOperator) {
 	return {
 		"/journalarticle/search-count": {
 			"companyId": companyId,

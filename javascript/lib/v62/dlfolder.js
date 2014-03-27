@@ -231,7 +231,7 @@ DLFolderService.prototype.getSubfolderIds = function(folderIds, groupId, folderI
 	};
 };
 
-DLFolderService.prototype.getSubfolderIds = function(groupId, folderId, recurse) {
+DLFolderService.prototype.getSubfolderIds1 = function(groupId, folderId, recurse) {
 	return {
 		"/dlfolder/get-subfolder-ids": {
 			"groupId": groupId,

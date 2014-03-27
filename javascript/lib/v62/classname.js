@@ -17,7 +17,7 @@ ClassNameService.prototype.fetchClassNameId = function(clazz) {
 	};
 };
 
-ClassNameService.prototype.fetchClassNameId = function(value) {
+ClassNameService.prototype.fetchClassNameId1 = function(value) {
 	return {
 		"/classname/fetch-class-name-id": {
 			"value": value

@@ -17,7 +17,7 @@ DLAppService.prototype.addFileEntry = function(repositoryId, folderId, sourceFil
 	};
 };
 
-DLAppService.prototype.addFileEntry = function(repositoryId, folderId, sourceFileName, mimeType, title, description, changeLog, file, serviceContext) {
+DLAppService.prototype.addFileEntry1 = function(repositoryId, folderId, sourceFileName, mimeType, title, description, changeLog, file, serviceContext) {
 	return {
 		"/dlapp/add-file-entry": {
 			"repositoryId": repositoryId,
@@ -223,7 +223,7 @@ DLAppService.prototype.getFileEntries = function(repositoryId, folderId, fileEnt
 	};
 };
 
-DLAppService.prototype.getFileEntries = function(repositoryId, folderId, mimeTypes) {
+DLAppService.prototype.getFileEntries1 = function(repositoryId, folderId, mimeTypes) {
 	return {
 		"/dlapp/get-file-entries": {
 			"repositoryId": repositoryId,
@@ -256,7 +256,7 @@ DLAppService.prototype.getFileEntries = function(repositoryId, folderId, fileEnt
 	};
 };
 
-DLAppService.prototype.getFileEntries = function(repositoryId, folderId, start, end, obc) {
+DLAppService.prototype.getFileEntries1 = function(repositoryId, folderId, start, end, obc) {
 	return {
 		"/dlapp/get-file-entries": {
 			"repositoryId": repositoryId,
@@ -428,7 +428,7 @@ DLAppService.prototype.getFolders = function(repositoryId, parentFolderId, inclu
 	};
 };
 
-DLAppService.prototype.getFolders = function(repositoryId, parentFolderId, start, end, obc) {
+DLAppService.prototype.getFolders1 = function(repositoryId, parentFolderId, start, end, obc) {
 	return {
 		"/dlapp/get-folders": {
 			"repositoryId": repositoryId,
@@ -595,7 +595,7 @@ DLAppService.prototype.getGroupFileEntries = function(groupId, userId, rootFolde
 	};
 };
 
-DLAppService.prototype.getGroupFileEntries = function(groupId, userId, start, end, obc) {
+DLAppService.prototype.getGroupFileEntries1 = function(groupId, userId, start, end, obc) {
 	return {
 		"/dlapp/get-group-file-entries": {
 			"groupId": groupId,
@@ -726,7 +726,7 @@ DLAppService.prototype.getSubfolderIds = function(repositoryId, folderId, recurs
 	};
 };
 
-DLAppService.prototype.getSubfolderIds = function(repositoryId, folderIds, folderId) {
+DLAppService.prototype.getSubfolderIds1 = function(repositoryId, folderIds, folderId) {
 	return {
 		"/dlapp/get-subfolder-ids": {
 			"repositoryId": repositoryId,
@@ -1048,7 +1048,7 @@ DLAppService.prototype.updateFileEntry = function(fileEntryId, sourceFileName, m
 	};
 };
 
-DLAppService.prototype.updateFileEntry = function(fileEntryId, sourceFileName, mimeType, title, description, changeLog, majorVersion, file, serviceContext) {
+DLAppService.prototype.updateFileEntry1 = function(fileEntryId, sourceFileName, mimeType, title, description, changeLog, majorVersion, file, serviceContext) {
 	return {
 		"/dlapp/update-file-entry": {
 			"fileEntryId": fileEntryId,

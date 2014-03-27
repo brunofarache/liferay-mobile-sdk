@@ -54,7 +54,7 @@ UserGroupService.prototype.getUserGroup = function(name) {
 	};
 };
 
-UserGroupService.prototype.getUserGroup = function(userGroupId) {
+UserGroupService.prototype.getUserGroup1 = function(userGroupId) {
 	return {
 		"/usergroup/get-user-group": {
 			"userGroupId": userGroupId

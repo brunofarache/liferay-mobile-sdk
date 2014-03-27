@@ -330,7 +330,7 @@ LayoutService.prototype.importLayouts = function(groupId, privateLayout, paramet
 	};
 };
 
-LayoutService.prototype.importLayouts = function(groupId, privateLayout, parameterMap, file) {
+LayoutService.prototype.importLayouts1 = function(groupId, privateLayout, parameterMap, file) {
 	return {
 		"/layout/import-layouts": {
 			"groupId": groupId,
@@ -497,7 +497,7 @@ LayoutService.prototype.updateLayout = function(groupId, privateLayout, layoutId
 	};
 };
 
-LayoutService.prototype.updateLayout = function(groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap, localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type, hidden, friendlyURLMap, iconImage, iconBytes, serviceContext) {
+LayoutService.prototype.updateLayout1 = function(groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap, localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type, hidden, friendlyURLMap, iconImage, iconBytes, serviceContext) {
 	return {
 		"/layout/update-layout": {
 			"groupId": groupId,

@@ -11,7 +11,7 @@ UserGroupRoleService.prototype.addUserGroupRoles = function(userId, groupId, rol
 	};
 };
 
-UserGroupRoleService.prototype.addUserGroupRoles = function(userIds, groupId, roleId) {
+UserGroupRoleService.prototype.addUserGroupRoles1 = function(userIds, groupId, roleId) {
 	return {
 		"/usergrouprole/add-user-group-roles": {
 			"userIds": userIds,
@@ -31,7 +31,7 @@ UserGroupRoleService.prototype.deleteUserGroupRoles = function(userId, groupId, 
 	};
 };
 
-UserGroupRoleService.prototype.deleteUserGroupRoles = function(userIds, groupId, roleId) {
+UserGroupRoleService.prototype.deleteUserGroupRoles1 = function(userIds, groupId, roleId) {
 	return {
 		"/usergrouprole/delete-user-group-roles": {
 			"userIds": userIds,

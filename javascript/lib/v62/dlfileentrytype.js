@@ -115,7 +115,7 @@ DLFileEntryTypeService.prototype.updateFileEntryType = function(fileEntryTypeId,
 	};
 };
 
-DLFileEntryTypeService.prototype.updateFileEntryType = function(fileEntryTypeId, nameMap, descriptionMap, ddmStructureIds, serviceContext) {
+DLFileEntryTypeService.prototype.updateFileEntryType1 = function(fileEntryTypeId, nameMap, descriptionMap, ddmStructureIds, serviceContext) {
 	return {
 		"/dlfileentrytype/update-file-entry-type": {
 			"fileEntryTypeId": fileEntryTypeId,

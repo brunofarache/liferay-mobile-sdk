@@ -51,7 +51,7 @@ MDRRuleService.prototype.updateRule = function(ruleId, nameMap, descriptionMap, 
 	};
 };
 
-MDRRuleService.prototype.updateRule = function(ruleId, nameMap, descriptionMap, type, typeSettingsProperties, serviceContext) {
+MDRRuleService.prototype.updateRule1 = function(ruleId, nameMap, descriptionMap, type, typeSettingsProperties, serviceContext) {
 	return {
 		"/mdrrule/update-rule": {
 			"ruleId": ruleId,

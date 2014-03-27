@@ -38,7 +38,7 @@ ExpandoValueService.prototype.getData = function(companyId, className, tableName
 	};
 };
 
-ExpandoValueService.prototype.getData = function(companyId, className, tableName, columnNames, classPK) {
+ExpandoValueService.prototype.getData1 = function(companyId, className, tableName, columnNames, classPK) {
 	return {
 		"/expandovalue/get-data": {
 			"companyId": companyId,

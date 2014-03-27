@@ -51,7 +51,7 @@ MBCategoryService.prototype.deleteCategory = function(categoryId, includeTrashed
 	};
 };
 
-MBCategoryService.prototype.deleteCategory = function(groupId, categoryId) {
+MBCategoryService.prototype.deleteCategory1 = function(groupId, categoryId) {
 	return {
 		"/mbcategory/delete-category": {
 			"groupId": groupId,
@@ -88,7 +88,7 @@ MBCategoryService.prototype.getCategories = function(groupId, parentCategoryId, 
 	};
 };
 
-MBCategoryService.prototype.getCategories = function(groupId, parentCategoryIds, start, end) {
+MBCategoryService.prototype.getCategories1 = function(groupId, parentCategoryIds, start, end) {
 	return {
 		"/mbcategory/get-categories": {
 			"groupId": groupId,
@@ -111,7 +111,7 @@ MBCategoryService.prototype.getCategories = function(groupId, parentCategoryId, 
 	};
 };
 
-MBCategoryService.prototype.getCategories = function(groupId, parentCategoryIds, status, start, end) {
+MBCategoryService.prototype.getCategories1 = function(groupId, parentCategoryIds, status, start, end) {
 	return {
 		"/mbcategory/get-categories": {
 			"groupId": groupId,
@@ -132,7 +132,7 @@ MBCategoryService.prototype.getCategoriesCount = function(groupId, parentCategor
 	};
 };
 
-MBCategoryService.prototype.getCategoriesCount = function(groupId, parentCategoryIds) {
+MBCategoryService.prototype.getCategoriesCount1 = function(groupId, parentCategoryIds) {
 	return {
 		"/mbcategory/get-categories-count": {
 			"groupId": groupId,
@@ -151,7 +151,7 @@ MBCategoryService.prototype.getCategoriesCount = function(groupId, parentCategor
 	};
 };
 
-MBCategoryService.prototype.getCategoriesCount = function(groupId, parentCategoryIds, status) {
+MBCategoryService.prototype.getCategoriesCount1 = function(groupId, parentCategoryIds, status) {
 	return {
 		"/mbcategory/get-categories-count": {
 			"groupId": groupId,

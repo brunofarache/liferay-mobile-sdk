@@ -149,7 +149,7 @@ DLFileEntryService.prototype.getFileEntries = function(groupId, folderId, fileEn
 	};
 };
 
-DLFileEntryService.prototype.getFileEntries = function(groupId, folderId, mimeTypes, start, end, obc) {
+DLFileEntryService.prototype.getFileEntries1 = function(groupId, folderId, mimeTypes, start, end, obc) {
 	return {
 		"/dlfileentry/get-file-entries": {
 			"groupId": groupId,
@@ -162,7 +162,7 @@ DLFileEntryService.prototype.getFileEntries = function(groupId, folderId, mimeTy
 	};
 };
 
-DLFileEntryService.prototype.getFileEntries = function(groupId, folderId, status, start, end, obc) {
+DLFileEntryService.prototype.getFileEntries2 = function(groupId, folderId, status, start, end, obc) {
 	return {
 		"/dlfileentry/get-file-entries": {
 			"groupId": groupId,
@@ -194,7 +194,7 @@ DLFileEntryService.prototype.getFileEntriesCount = function(groupId, folderId, f
 	};
 };
 
-DLFileEntryService.prototype.getFileEntriesCount = function(groupId, folderId, mimeTypes) {
+DLFileEntryService.prototype.getFileEntriesCount1 = function(groupId, folderId, mimeTypes) {
 	return {
 		"/dlfileentry/get-file-entries-count": {
 			"groupId": groupId,
@@ -204,7 +204,7 @@ DLFileEntryService.prototype.getFileEntriesCount = function(groupId, folderId, m
 	};
 };
 
-DLFileEntryService.prototype.getFileEntriesCount = function(groupId, folderId, status) {
+DLFileEntryService.prototype.getFileEntriesCount2 = function(groupId, folderId, status) {
 	return {
 		"/dlfileentry/get-file-entries-count": {
 			"groupId": groupId,

@@ -141,7 +141,7 @@ JournalFolderService.prototype.getFoldersAndArticlesCount = function(groupId, fo
 	};
 };
 
-JournalFolderService.prototype.getFoldersAndArticlesCount = function(groupId, folderIds, status) {
+JournalFolderService.prototype.getFoldersAndArticlesCount1 = function(groupId, folderIds, status) {
 	return {
 		"/journalfolder/get-folders-and-articles-count": {
 			"groupId": groupId,
@@ -180,7 +180,7 @@ JournalFolderService.prototype.getSubfolderIds = function(folderIds, groupId, fo
 	};
 };
 
-JournalFolderService.prototype.getSubfolderIds = function(groupId, folderId, recurse) {
+JournalFolderService.prototype.getSubfolderIds1 = function(groupId, folderId, recurse) {
 	return {
 		"/journalfolder/get-subfolder-ids": {
 			"groupId": groupId,

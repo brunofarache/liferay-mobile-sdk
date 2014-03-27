@@ -53,7 +53,7 @@ RegionService.prototype.getRegions = function(active) {
 	};
 };
 
-RegionService.prototype.getRegions = function(countryId) {
+RegionService.prototype.getRegions1 = function(countryId) {
 	return {
 		"/region/get-regions": {
 			"countryId": countryId

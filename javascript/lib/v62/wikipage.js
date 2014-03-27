@@ -227,7 +227,7 @@ WikiPageService.prototype.getPage = function(groupId, nodeId, title) {
 	};
 };
 
-WikiPageService.prototype.getPage = function(nodeId, title, head) {
+WikiPageService.prototype.getPage1 = function(nodeId, title, head) {
 	return {
 		"/wikipage/get-page": {
 			"nodeId": nodeId,
@@ -237,7 +237,7 @@ WikiPageService.prototype.getPage = function(nodeId, title, head) {
 	};
 };
 
-WikiPageService.prototype.getPage = function(nodeId, title, version) {
+WikiPageService.prototype.getPage2 = function(nodeId, title, version) {
 	return {
 		"/wikipage/get-page": {
 			"nodeId": nodeId,

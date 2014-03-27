@@ -1,7 +1,7 @@
 function DDLRecordService() {
 }
 
-DDLRecordService.prototype.addRecord = function(groupId, recordSetId, displayIndex, fieldsMap, serviceContext) {
+DDLRecordService.prototype.addRecord1 = function(groupId, recordSetId, displayIndex, fieldsMap, serviceContext) {
 	return {
 		"/ddlrecord/add-record": {
 			"groupId": groupId,

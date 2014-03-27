@@ -23,7 +23,7 @@ LayoutSetService.prototype.updateLogo = function(groupId, privateLayout, logo, b
 	};
 };
 
-LayoutSetService.prototype.updateLogo = function(groupId, privateLayout, logo, file) {
+LayoutSetService.prototype.updateLogo1 = function(groupId, privateLayout, logo, file) {
 	return {
 		"/layoutset/update-logo": {
 			"groupId": groupId,

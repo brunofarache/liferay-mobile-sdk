@@ -9,7 +9,7 @@ TrashEntryService.prototype.deleteEntries = function(entryIds) {
 	};
 };
 
-TrashEntryService.prototype.deleteEntries = function(groupId) {
+TrashEntryService.prototype.deleteEntries1 = function(groupId) {
 	return {
 		"/trashentry/delete-entries": {
 			"groupId": groupId

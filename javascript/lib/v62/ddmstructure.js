@@ -125,7 +125,7 @@ DDMStructureService.prototype.getStructures = function(groupId) {
 	};
 };
 
-DDMStructureService.prototype.getStructures = function(groupIds) {
+DDMStructureService.prototype.getStructures1 = function(groupIds) {
 	return {
 		"/ddmstructure/get-structures": {
 			"groupIds": groupIds

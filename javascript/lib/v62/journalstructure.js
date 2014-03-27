@@ -63,7 +63,7 @@ JournalStructureService.prototype.getStructures = function(groupId) {
 	};
 };
 
-JournalStructureService.prototype.getStructures = function(groupIds) {
+JournalStructureService.prototype.getStructures1 = function(groupIds) {
 	return {
 		"/journalstructure/get-structures": {
 			"groupIds": groupIds

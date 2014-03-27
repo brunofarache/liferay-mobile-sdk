@@ -21,7 +21,7 @@ PortletPreferencesService.prototype.restoreArchivedPreferences = function(groupI
 	};
 };
 
-PortletPreferencesService.prototype.restoreArchivedPreferences = function(groupId, layout, portletId, portletItemId, preferences) {
+PortletPreferencesService.prototype.restoreArchivedPreferences1 = function(groupId, layout, portletId, portletItemId, preferences) {
 	return {
 		"/portletpreferences/restore-archived-preferences": {
 			"groupId": groupId,
@@ -33,7 +33,7 @@ PortletPreferencesService.prototype.restoreArchivedPreferences = function(groupI
 	};
 };
 
-PortletPreferencesService.prototype.restoreArchivedPreferences = function(groupId, name, layout, portletId, preferences) {
+PortletPreferencesService.prototype.restoreArchivedPreferences2 = function(groupId, name, layout, portletId, preferences) {
 	return {
 		"/portletpreferences/restore-archived-preferences": {
 			"groupId": groupId,

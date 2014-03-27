@@ -255,7 +255,7 @@ AssetCategoryService.prototype.search = function(groupId, name, categoryProperti
 	};
 };
 
-AssetCategoryService.prototype.search = function(groupIds, name, vocabularyIds, start, end) {
+AssetCategoryService.prototype.search1 = function(groupIds, name, vocabularyIds, start, end) {
 	return {
 		"/assetcategory/search": {
 			"groupIds": groupIds,

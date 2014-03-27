@@ -123,7 +123,7 @@ AssetTagService.prototype.getTags = function(groupId, name, tagProperties, start
 	};
 };
 
-AssetTagService.prototype.getTags = function(groupIds, name, tagProperties, start, end) {
+AssetTagService.prototype.getTags1 = function(groupIds, name, tagProperties, start, end) {
 	return {
 		"/assettag/get-tags": {
 			"groupIds": groupIds,
@@ -167,7 +167,7 @@ AssetTagService.prototype.getTagsCount = function(groupId, classNameId, name) {
 	};
 };
 
-AssetTagService.prototype.getTagsCount = function(groupId, name, tagProperties) {
+AssetTagService.prototype.getTagsCount1 = function(groupId, name, tagProperties) {
 	return {
 		"/assettag/get-tags-count": {
 			"groupId": groupId,
@@ -187,7 +187,7 @@ AssetTagService.prototype.mergeTags = function(fromTagId, toTagId, overridePrope
 	};
 };
 
-AssetTagService.prototype.mergeTags = function(fromTagIds, toTagId, overrideProperties) {
+AssetTagService.prototype.mergeTags1 = function(fromTagIds, toTagId, overrideProperties) {
 	return {
 		"/assettag/merge-tags": {
 			"fromTagIds": fromTagIds,
@@ -209,7 +209,7 @@ AssetTagService.prototype.search = function(groupId, name, tagProperties, start,
 	};
 };
 
-AssetTagService.prototype.search = function(groupIds, name, tagProperties, start, end) {
+AssetTagService.prototype.search1 = function(groupIds, name, tagProperties, start, end) {
 	return {
 		"/assettag/search": {
 			"groupIds": groupIds,
