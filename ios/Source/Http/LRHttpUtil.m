@@ -13,6 +13,7 @@
  */
 
 #import "LRHttpUtil.h"
+#import "LRDefaultHttpQueue.h"
 
 NSString *const LR_ERROR_DOMAIN = @"com.liferay.mobile";
 NSString *const LR_GET = @"GET";
@@ -232,8 +233,6 @@ static NSMutableDictionary *_versions;
 
 	id<LRCallback> callback = session.callback;
 
-	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-
 	LRHandler handler = ^(NSURLResponse *r, NSData *d, NSError *e) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (e) {
@@ -260,6 +259,14 @@ static NSMutableDictionary *_versions;
 			}
 		});
 	};
+
+	NSOperationQueue* queue;
+	if (session.queue) {
+		queue = session.queue;
+	}
+	else {
+		queue = [LRDefaultHttpQueue sharedQueue];
+	}
 
 	[NSURLConnection sendAsynchronousRequest:request queue:queue
 		completionHandler:handler];
