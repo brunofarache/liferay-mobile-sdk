@@ -334,7 +334,17 @@ public class DDMTemplateService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getTemplatesByStructureClassNameId(long groupId, long structureClassNameId, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray getTemplatesByStructureClassNameId(long groupId, long structureClassNameId, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -344,7 +354,7 @@ public class DDMTemplateService extends BaseService {
 			_params.put("structureClassNameId", structureClassNameId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/ddmtemplate/get-templates-by-structure-class-name-id", _params);
 		}
@@ -373,7 +383,17 @@ public class DDMTemplateService extends BaseService {
 		return (Integer)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, long groupId, long classNameId, long classPK, String keywords, String type, String mode, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray search(long companyId, long groupId, long classNameId, long classPK, String keywords, String type, String mode, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -388,7 +408,7 @@ public class DDMTemplateService extends BaseService {
 			_params.put("mode", mode);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/ddmtemplate/search", _params);
 		}
@@ -399,7 +419,17 @@ public class DDMTemplateService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONArray groupIds, JSONArray classNameIds, JSONArray classPKs, String keywords, String type, String mode, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray search(long companyId, JSONArray groupIds, JSONArray classNameIds, JSONArray classPKs, String keywords, String type, String mode, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -414,7 +444,7 @@ public class DDMTemplateService extends BaseService {
 			_params.put("mode", mode);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/ddmtemplate/search", _params);
 		}
@@ -425,7 +455,17 @@ public class DDMTemplateService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, long groupId, long classNameId, long classPK, String name, String description, String type, String mode, String language, boolean andOperator, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray search(long companyId, long groupId, long classNameId, long classPK, String name, String description, String type, String mode, String language, boolean andOperator, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -443,7 +483,7 @@ public class DDMTemplateService extends BaseService {
 			_params.put("andOperator", andOperator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/ddmtemplate/search", _params);
 		}
@@ -454,7 +494,17 @@ public class DDMTemplateService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONArray groupIds, JSONArray classNameIds, JSONArray classPKs, String name, String description, String type, String mode, String language, boolean andOperator, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray search(long companyId, JSONArray groupIds, JSONArray classNameIds, JSONArray classPKs, String name, String description, String type, String mode, String language, boolean andOperator, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -472,7 +522,7 @@ public class DDMTemplateService extends BaseService {
 			_params.put("andOperator", andOperator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/ddmtemplate/search", _params);
 		}

@@ -505,7 +505,17 @@ public class WikiPageService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getPages(long groupId, long nodeId, boolean head, int status, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getPages(long groupId, long nodeId, boolean head, int status, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -517,7 +527,7 @@ public class WikiPageService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/wikipage/get-pages", _params);
 		}

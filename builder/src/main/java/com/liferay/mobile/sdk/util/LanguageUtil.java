@@ -14,6 +14,9 @@
 
 package com.liferay.mobile.sdk.util;
 
+import com.liferay.mobile.sdk.http.Parameter;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +57,14 @@ public class LanguageUtil {
 		return path.substring(index);
 	}
 
+	public String getParamName(String paramName, String paramType) {
+		if (isComparator(paramType)) {
+			return paramName + "ClassName";
+		}
+
+		return paramName;
+	}
+
 	public String getServiceClassName(String serviceContext) {
 		StringBuilder sb = new StringBuilder();
 
@@ -78,6 +89,26 @@ public class LanguageUtil {
 		}
 
 		return false;
+	}
+
+	public boolean isComparator(String type) {
+		if (type.equals(
+				"object<com.liferay.portal.kernel.util.OrderByComparator>")) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public Parameter getComparatorParam(ArrayList<Parameter> parameters) {
+		for (Parameter p : parameters) {
+			if (isComparator(p.getType())) {
+				return p;
+			}
+		}
+
+		return null;
 	}
 
 	protected static final Map<String, String> CLASS_NAMES =

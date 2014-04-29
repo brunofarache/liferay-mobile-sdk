@@ -70,12 +70,22 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSDictionary *)getEntriesWithGroupId:(long long)groupId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSDictionary *)getEntriesWithGroupId:(long long)groupId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/trashentry/get-entries": _params};

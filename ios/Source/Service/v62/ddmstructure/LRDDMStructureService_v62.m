@@ -175,7 +175,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds name:(NSString *)name description:(NSString *)description storageType:(NSString *)storageType type:(int)type andOperator:(BOOL)andOperator start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds name:(NSString *)name description:(NSString *)description storageType:(NSString *)storageType type:(int)type andOperator:(BOOL)andOperator start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupIds": groupIds,
@@ -187,7 +197,7 @@
 		@"andOperator": @(andOperator),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/ddmstructure/search": _params};
@@ -195,7 +205,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds keywords:(NSString *)keywords start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds keywords:(NSString *)keywords start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupIds": groupIds,
@@ -203,7 +223,7 @@
 		@"keywords": keywords,
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/ddmstructure/search": _params};

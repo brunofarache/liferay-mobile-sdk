@@ -216,7 +216,17 @@ public class JournalFolderService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFoldersAndArticles(long groupId, long folderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFoldersAndArticles(long groupId, long folderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -226,7 +236,7 @@ public class JournalFolderService extends BaseService {
 			_params.put("folderId", folderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalfolder/get-folders-and-articles", _params);
 		}
@@ -237,7 +247,17 @@ public class JournalFolderService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFoldersAndArticles(long groupId, long folderId, int status, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFoldersAndArticles(long groupId, long folderId, int status, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -248,7 +268,7 @@ public class JournalFolderService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalfolder/get-folders-and-articles", _params);
 		}

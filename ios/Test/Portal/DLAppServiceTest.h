@@ -19,4 +19,7 @@
  */
 @interface DLAppServiceTest : BaseTest
 
+@property (nonatomic, readonly) long long repositoryId;
+@property (nonatomic, strong) NSMutableArray* cleanUpFolderIds;
+
 @end

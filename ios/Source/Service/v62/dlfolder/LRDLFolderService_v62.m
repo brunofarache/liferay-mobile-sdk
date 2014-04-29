@@ -140,13 +140,23 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getFoldersWithGroupId:(long long)groupId parentFolderId:(long long)parentFolderId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getFoldersWithGroupId:(long long)groupId parentFolderId:(long long)parentFolderId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"parentFolderId": @(parentFolderId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/dlfolder/get-folders": _params};
@@ -154,7 +164,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getFoldersWithGroupId:(long long)groupId parentFolderId:(long long)parentFolderId status:(int)status includeMountfolders:(BOOL)includeMountfolders start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getFoldersWithGroupId:(long long)groupId parentFolderId:(long long)parentFolderId status:(int)status includeMountfolders:(BOOL)includeMountfolders start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"parentFolderId": @(parentFolderId),
@@ -162,7 +182,7 @@
 		@"includeMountfolders": @(includeMountfolders),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/dlfolder/get-folders": _params};
@@ -170,7 +190,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getFoldersAndFileEntriesAndFileShortcutsWithGroupId:(long long)groupId folderId:(long long)folderId status:(int)status includeMountFolders:(BOOL)includeMountFolders start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getFoldersAndFileEntriesAndFileShortcutsWithGroupId:(long long)groupId folderId:(long long)folderId status:(int)status includeMountFolders:(BOOL)includeMountFolders start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"folderId": @(folderId),
@@ -178,7 +208,7 @@
 		@"includeMountFolders": @(includeMountFolders),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/dlfolder/get-folders-and-file-entries-and-file-shortcuts": _params};
@@ -186,7 +216,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getFoldersAndFileEntriesAndFileShortcutsWithGroupId:(long long)groupId folderId:(long long)folderId status:(int)status mimeTypes:(NSArray *)mimeTypes includeMountFolders:(BOOL)includeMountFolders start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getFoldersAndFileEntriesAndFileShortcutsWithGroupId:(long long)groupId folderId:(long long)folderId status:(int)status mimeTypes:(NSArray *)mimeTypes includeMountFolders:(BOOL)includeMountFolders start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"folderId": @(folderId),
@@ -195,7 +235,7 @@
 		@"includeMountFolders": @(includeMountFolders),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/dlfolder/get-folders-and-file-entries-and-file-shortcuts": _params};
@@ -254,13 +294,23 @@
 	return (NSNumber *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getMountFoldersWithGroupId:(long long)groupId parentFolderId:(long long)parentFolderId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getMountFoldersWithGroupId:(long long)groupId parentFolderId:(long long)parentFolderId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"parentFolderId": @(parentFolderId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/dlfolder/get-mount-folders": _params};

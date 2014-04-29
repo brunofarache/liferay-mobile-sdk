@@ -29,13 +29,23 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getContactsWithClassNameId:(long long)classNameId classPK:(long long)classPK start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)getContactsWithClassNameId:(long long)classNameId classPK:(long long)classPK start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"classNameId": @(classNameId),
 		@"classPK": @(classPK),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/contact/get-contacts": _params};

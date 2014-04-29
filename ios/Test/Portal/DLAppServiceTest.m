@@ -21,11 +21,26 @@
  */
 @implementation DLAppServiceTest
 
+- (void)setUp {
+	[super setUp];
+
+	_repositoryId = [self.settings[@"repositoryId"] longLongValue];
+
+	self.cleanUpFolderIds = [[NSMutableArray alloc] init];
+}
+
+- (void)tearDown {
+	[super tearDown];
+
+	if ([self.cleanUpFolderIds count] > 0) {
+		[self _deleteFoldersBatch:self.cleanUpFolderIds];
+	}
+}
+
 - (void)testAddFolder {
+
 	LRDLAppService_v62 *service =
 		[[LRDLAppService_v62 alloc] initWithSession:self.session];
-
-	long long repositoryId = [self.settings[@"repositoryId"] longLongValue];
 
 	NSString *name =
 		[NSString stringWithFormat:@"test-name-%@", [[NSUUID UUID] UUIDString]];
@@ -34,7 +49,7 @@
 		[NSString stringWithFormat:@"test-desc-%@", [[NSUUID UUID] UUIDString]];
 
 	NSError *error;
-	NSDictionary *result = [service addFolderWithRepositoryId:repositoryId
+	NSDictionary *result = [service addFolderWithRepositoryId:self.repositoryId
 		parentFolderId:0 name:name description:description serviceContext:@{}
 		error:&error];
 
@@ -47,15 +62,13 @@
 	long long folderId = [result[@"folderId"] longLongValue];
 
 	[self _getFolder:folderId exists:YES];
-	[self _deleteFolder:folderId];
+	[self.cleanUpFolderIds addObject:@(folderId)];
 }
 
 - (void)testAddFoldersBatch {
 	LRBatchSession *batch = [[LRBatchSession alloc] init:self.session];
 	LRDLAppService_v62 *service =
 		[[LRDLAppService_v62 alloc] initWithSession:batch];
-
-	long long repositoryId = [self.settings[@"repositoryId"] longLongValue];
 
 	NSString *uuid = [[NSUUID UUID] UUIDString];
 	NSString *name1 = [NSString stringWithFormat:@"1-test-name-%@", uuid];
@@ -72,13 +85,13 @@
 		[NSString stringWithFormat:@"2-test-desc-%@", uuid];
 
 	NSError *error;
-	[service addFolderWithRepositoryId:repositoryId parentFolderId:0 name:name1
-		description:description1 serviceContext:@{} error:&error];
+	[service addFolderWithRepositoryId:self.repositoryId parentFolderId:0
+		name:name1 description:description1 serviceContext:@{} error:&error];
 
 	XCTAssertNil(error);
 
-	[service addFolderWithRepositoryId:repositoryId parentFolderId:0 name:name2
-		description:description2 serviceContext:@{} error:&error];
+	[service addFolderWithRepositoryId:self.repositoryId parentFolderId:0
+		name:name2 description:description2 serviceContext:@{} error:&error];
 
 	XCTAssertNil(error);
 	NSArray *result = [batch invoke:&error];
@@ -96,7 +109,17 @@
 	NSArray *ids = [result valueForKey:@"folderId"];
 
 	[self _getFolders:ids exists:YES];
-	[self _deleteFoldersBatch:ids];
+
+	[self.cleanUpFolderIds addObjectsFromArray:ids];
+}
+
+- (void)testGetFoldersWithComparator {
+	[self _testGetFoldersWithComparator:
+		@"com.liferay.portlet.documentlibrary.util.comparator.FolderIdComparator"];
+}
+
+- (void)testGetFoldersWithNullComparator {
+	[self _testGetFoldersWithComparator:nil];
 }
 
 - (void)_deleteFolder:(long long)folderId {
@@ -192,5 +215,50 @@
 			[description hasPrefix:@"No DLFolder exists with the primary key"]);
 	}
 }
+
+- (void)_testGetFoldersWithComparator:(NSString *)comparatorClassName {
+	LRDLAppService_v62 *service =
+		[[LRDLAppService_v62 alloc] initWithSession:self.session];
+
+	NSError *error;
+
+	NSArray *existingFolders =
+		[service getFoldersWithRepositoryId:self.repositoryId parentFolderId:0
+			start:0 end:5 obcClassName:comparatorClassName error:&error];
+
+	XCTAssertNil(error);
+
+	NSString *name1 =
+		[NSString stringWithFormat:@"name-1-%@", [[NSUUID UUID] UUIDString]];
+	NSString *name2 =
+		[NSString stringWithFormat:@"name-2-%@", [[NSUUID UUID] UUIDString]];
+
+	[service addFolderWithRepositoryId:self.repositoryId
+		parentFolderId:0 name:name1 description:[[NSUUID UUID] UUIDString]
+		serviceContext:@{} error:&error];
+	XCTAssertNil(error);
+
+	[service addFolderWithRepositoryId:self.repositoryId
+		parentFolderId:0 name:name2 description:[[NSUUID UUID] UUIDString]
+		serviceContext:@{} error:&error];
+	XCTAssertNil(error);
+
+	NSArray *newFolders =
+		[service getFoldersWithRepositoryId:self.repositoryId parentFolderId:0
+			start:0 end:5 obcClassName:comparatorClassName error:&error];
+	XCTAssertNil(error);
+
+	XCTAssertEqual([existingFolders count] + 2, [newFolders count]);
+
+	NSDictionary *folder1 = newFolders[[newFolders count] - 2];
+	NSDictionary *folder2 = newFolders[[newFolders count] - 1];
+
+	XCTAssertEqualObjects(name1, folder1[@"name"]);
+	XCTAssertEqualObjects(name2, folder2[@"name"]);
+
+	[self.cleanUpFolderIds addObject:folder1[@"folderId"]];
+	[self.cleanUpFolderIds addObject:folder2[@"folderId"]];
+}
+
 
 @end

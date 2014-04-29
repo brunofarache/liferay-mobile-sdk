@@ -175,7 +175,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getChildCategories(long parentCategoryId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getChildCategories(long parentCategoryId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -184,7 +194,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("parentCategoryId", parentCategoryId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-child-categories", _params);
 		}
@@ -216,7 +226,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONObject getJsonVocabularyCategories(long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONObject getJsonVocabularyCategories(long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -225,7 +245,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-json-vocabulary-categories", _params);
 		}
@@ -236,7 +256,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONObject getJsonVocabularyCategories(long groupId, String name, long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONObject getJsonVocabularyCategories(long groupId, String name, long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -247,7 +277,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-json-vocabulary-categories", _params);
 		}
@@ -258,7 +288,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONArray getVocabularyCategories(long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getVocabularyCategories(long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -267,7 +307,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-categories", _params);
 		}
@@ -278,7 +318,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getVocabularyCategories(long parentCategoryId, long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getVocabularyCategories(long parentCategoryId, long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -288,7 +338,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-categories", _params);
 		}
@@ -299,7 +349,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getVocabularyCategories(long groupId, String name, long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getVocabularyCategories(long groupId, String name, long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -310,7 +370,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-categories", _params);
 		}
@@ -358,7 +418,17 @@ public class AssetCategoryService extends BaseService {
 		return (Integer)session.invoke(_command);
 	}
 
-	public JSONObject getVocabularyCategoriesDisplay(long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONObject getVocabularyCategoriesDisplay(long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -367,7 +437,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-categories-display", _params);
 		}
@@ -378,7 +448,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONObject getVocabularyCategoriesDisplay(long groupId, String name, long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONObject getVocabularyCategoriesDisplay(long groupId, String name, long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -389,7 +469,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-categories-display", _params);
 		}
@@ -400,7 +480,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONArray getVocabularyRootCategories(long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getVocabularyRootCategories(long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -409,7 +499,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-root-categories", _params);
 		}
@@ -420,7 +510,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getVocabularyRootCategories(long groupId, long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getVocabularyRootCategories(long groupId, long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -430,7 +530,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/get-vocabulary-root-categories", _params);
 		}
@@ -521,7 +621,17 @@ public class AssetCategoryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long groupId, String keywords, long vocabularyId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long groupId, String keywords, long vocabularyId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -532,7 +642,7 @@ public class AssetCategoryService extends BaseService {
 			_params.put("vocabularyId", vocabularyId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assetcategory/search", _params);
 		}

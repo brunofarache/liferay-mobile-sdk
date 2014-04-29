@@ -116,7 +116,17 @@ public class TrashEntryService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONObject getEntries(long groupId, int start, int end, JSONObject obc) throws Exception {
+	public JSONObject getEntries(long groupId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -125,7 +135,7 @@ public class TrashEntryService extends BaseService {
 			_params.put("groupId", groupId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/trashentry/get-entries", _params);
 		}

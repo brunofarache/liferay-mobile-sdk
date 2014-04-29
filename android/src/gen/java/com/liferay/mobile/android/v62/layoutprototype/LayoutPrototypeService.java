@@ -103,7 +103,17 @@ public class LayoutPrototypeService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONObject active, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, JSONObject active, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -111,7 +121,7 @@ public class LayoutPrototypeService extends BaseService {
 
 			_params.put("companyId", companyId);
 			_params.put("active", active);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/layoutprototype/search", _params);
 		}

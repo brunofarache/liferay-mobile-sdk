@@ -64,11 +64,21 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId active:(NSDictionary *)active obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId active:(NSDictionary *)active obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"active": active,
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/layoutprototype/search": _params};

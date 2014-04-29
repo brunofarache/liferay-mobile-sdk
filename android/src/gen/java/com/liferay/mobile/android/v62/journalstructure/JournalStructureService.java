@@ -163,7 +163,17 @@ public class JournalStructureService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONArray groupIds, String keywords, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, JSONArray groupIds, String keywords, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -174,7 +184,7 @@ public class JournalStructureService extends BaseService {
 			_params.put("keywords", keywords);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalstructure/search", _params);
 		}
@@ -185,7 +195,17 @@ public class JournalStructureService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONArray groupIds, String structureId, String name, String description, boolean andOperator, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, JSONArray groupIds, String structureId, String name, String description, boolean andOperator, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -199,7 +219,7 @@ public class JournalStructureService extends BaseService {
 			_params.put("andOperator", andOperator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalstructure/search", _params);
 		}

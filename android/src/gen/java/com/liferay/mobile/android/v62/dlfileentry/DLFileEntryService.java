@@ -270,7 +270,17 @@ public class DLFileEntryService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONArray getFileEntries(long groupId, long folderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFileEntries(long groupId, long folderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -280,7 +290,7 @@ public class DLFileEntryService extends BaseService {
 			_params.put("folderId", folderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlfileentry/get-file-entries", _params);
 		}
@@ -291,7 +301,17 @@ public class DLFileEntryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFileEntries(long groupId, long folderId, long fileEntryTypeId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFileEntries(long groupId, long folderId, long fileEntryTypeId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -302,7 +322,7 @@ public class DLFileEntryService extends BaseService {
 			_params.put("fileEntryTypeId", fileEntryTypeId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlfileentry/get-file-entries", _params);
 		}
@@ -313,7 +333,17 @@ public class DLFileEntryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFileEntries(long groupId, long folderId, JSONArray mimeTypes, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFileEntries(long groupId, long folderId, JSONArray mimeTypes, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -324,7 +354,7 @@ public class DLFileEntryService extends BaseService {
 			_params.put("mimeTypes", mimeTypes);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlfileentry/get-file-entries", _params);
 		}
@@ -335,7 +365,17 @@ public class DLFileEntryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFileEntries(long groupId, long folderId, int status, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFileEntries(long groupId, long folderId, int status, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -346,7 +386,7 @@ public class DLFileEntryService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlfileentry/get-file-entries", _params);
 		}
@@ -522,7 +562,17 @@ public class DLFileEntryService extends BaseService {
 		return (Integer)session.invoke(_command);
 	}
 
-	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -533,7 +583,7 @@ public class DLFileEntryService extends BaseService {
 			_params.put("rootFolderId", rootFolderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlfileentry/get-group-file-entries", _params);
 		}
@@ -544,7 +594,17 @@ public class DLFileEntryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, JSONArray mimeTypes, int status, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, JSONArray mimeTypes, int status, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -557,7 +617,7 @@ public class DLFileEntryService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlfileentry/get-group-file-entries", _params);
 		}

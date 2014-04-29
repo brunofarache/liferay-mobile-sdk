@@ -47,7 +47,17 @@ public class ContactService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONArray getContacts(long classNameId, long classPK, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray getContacts(long classNameId, long classPK, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -57,7 +67,7 @@ public class ContactService extends BaseService {
 			_params.put("classPK", classPK);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/contact/get-contacts", _params);
 		}

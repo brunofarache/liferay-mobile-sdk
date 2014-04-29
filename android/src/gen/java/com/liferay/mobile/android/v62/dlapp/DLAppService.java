@@ -501,7 +501,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFileEntries(long repositoryId, long folderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFileEntries(long repositoryId, long folderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -511,7 +521,7 @@ public class DLAppService extends BaseService {
 			_params.put("folderId", folderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-file-entries", _params);
 		}
@@ -522,7 +532,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFileEntries(long repositoryId, long folderId, long fileEntryTypeId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFileEntries(long repositoryId, long folderId, long fileEntryTypeId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -533,7 +553,7 @@ public class DLAppService extends BaseService {
 			_params.put("fileEntryTypeId", fileEntryTypeId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-file-entries", _params);
 		}
@@ -826,7 +846,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFolders(long repositoryId, long parentFolderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFolders(long repositoryId, long parentFolderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -836,7 +866,7 @@ public class DLAppService extends BaseService {
 			_params.put("parentFolderId", parentFolderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-folders", _params);
 		}
@@ -847,7 +877,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFolders(long repositoryId, long parentFolderId, boolean includeMountFolders, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFolders(long repositoryId, long parentFolderId, boolean includeMountFolders, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -858,7 +898,7 @@ public class DLAppService extends BaseService {
 			_params.put("includeMountFolders", includeMountFolders);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-folders", _params);
 		}
@@ -869,7 +909,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFolders(long repositoryId, long parentFolderId, int status, boolean includeMountFolders, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFolders(long repositoryId, long parentFolderId, int status, boolean includeMountFolders, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -881,7 +931,7 @@ public class DLAppService extends BaseService {
 			_params.put("includeMountFolders", includeMountFolders);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-folders", _params);
 		}
@@ -914,7 +964,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFoldersAndFileEntriesAndFileShortcuts(long repositoryId, long folderId, int status, boolean includeMountFolders, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFoldersAndFileEntriesAndFileShortcuts(long repositoryId, long folderId, int status, boolean includeMountFolders, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -926,7 +986,7 @@ public class DLAppService extends BaseService {
 			_params.put("includeMountFolders", includeMountFolders);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-folders-and-file-entries-and-file-shortcuts", _params);
 		}
@@ -937,7 +997,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getFoldersAndFileEntriesAndFileShortcuts(long repositoryId, long folderId, int status, JSONArray mimeTypes, boolean includeMountFolders, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getFoldersAndFileEntriesAndFileShortcuts(long repositoryId, long folderId, int status, JSONArray mimeTypes, boolean includeMountFolders, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -950,7 +1020,7 @@ public class DLAppService extends BaseService {
 			_params.put("includeMountFolders", includeMountFolders);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-folders-and-file-entries-and-file-shortcuts", _params);
 		}
@@ -1119,7 +1189,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getGroupFileEntries(long groupId, long userId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getGroupFileEntries(long groupId, long userId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -1129,7 +1209,7 @@ public class DLAppService extends BaseService {
 			_params.put("userId", userId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-group-file-entries", _params);
 		}
@@ -1140,7 +1220,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -1151,7 +1241,7 @@ public class DLAppService extends BaseService {
 			_params.put("rootFolderId", rootFolderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-group-file-entries", _params);
 		}
@@ -1162,7 +1252,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, JSONArray mimeTypes, int status, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getGroupFileEntries(long groupId, long userId, long rootFolderId, JSONArray mimeTypes, int status, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -1175,7 +1275,7 @@ public class DLAppService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-group-file-entries", _params);
 		}
@@ -1282,7 +1382,17 @@ public class DLAppService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getMountFolders(long repositoryId, long parentFolderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getMountFolders(long repositoryId, long parentFolderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -1292,7 +1402,7 @@ public class DLAppService extends BaseService {
 			_params.put("parentFolderId", parentFolderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/dlapp/get-mount-folders", _params);
 		}

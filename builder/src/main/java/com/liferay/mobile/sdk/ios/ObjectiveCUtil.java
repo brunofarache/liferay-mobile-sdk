@@ -64,7 +64,7 @@ public class ObjectiveCUtil extends LanguageUtil {
 			return type;
 		}
 
-		if (type.equals("string")) {
+		if (type.equals("string") || isComparator(type)) {
 			return "NSString *";
 		}
 

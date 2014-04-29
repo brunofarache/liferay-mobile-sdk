@@ -24,7 +24,7 @@
 - (void)deleteEntryWithEntryId:(long long)entryId error:(NSError **)error;
 - (void)deleteEntryWithClassName:(NSString *)className classPK:(long long)classPK error:(NSError **)error;
 - (NSDictionary *)getEntriesWithGroupId:(long long)groupId error:(NSError **)error;
-- (NSDictionary *)getEntriesWithGroupId:(long long)groupId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error;
+- (NSDictionary *)getEntriesWithGroupId:(long long)groupId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error;
 - (void)moveEntryWithClassName:(NSString *)className classPK:(long long)classPK destinationContainerModelId:(long long)destinationContainerModelId serviceContext:(NSDictionary *)serviceContext error:(NSError **)error;
 - (NSDictionary *)restoreEntryWithEntryId:(long long)entryId error:(NSError **)error;
 - (NSDictionary *)restoreEntryWithEntryId:(long long)entryId overrideClassPK:(long long)overrideClassPK name:(NSString *)name error:(NSError **)error;

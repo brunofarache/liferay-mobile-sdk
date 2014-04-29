@@ -180,7 +180,17 @@ public class JournalTemplateService extends BaseService {
 		return (JSONObject)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONArray groupIds, String templateId, String structureId, String structureIdComparator, String name, String description, boolean andOperator, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, JSONArray groupIds, String templateId, String structureId, String structureIdComparator, String name, String description, boolean andOperator, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -196,7 +206,7 @@ public class JournalTemplateService extends BaseService {
 			_params.put("andOperator", andOperator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journaltemplate/search", _params);
 		}
@@ -207,7 +217,17 @@ public class JournalTemplateService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, JSONArray groupIds, String keywords, String structureId, String structureIdComparator, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, JSONArray groupIds, String keywords, String structureId, String structureIdComparator, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -220,7 +240,7 @@ public class JournalTemplateService extends BaseService {
 			_params.put("structureIdComparator", structureIdComparator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journaltemplate/search", _params);
 		}

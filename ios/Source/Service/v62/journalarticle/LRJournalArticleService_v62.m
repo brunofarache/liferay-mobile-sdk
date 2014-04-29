@@ -269,13 +269,23 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getArticlesWithGroupId:(long long)groupId folderId:(long long)folderId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getArticlesWithGroupId:(long long)groupId folderId:(long long)folderId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"folderId": @(folderId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/get-articles": _params};
@@ -283,13 +293,23 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getArticlesByArticleIdWithGroupId:(long long)groupId articleId:(NSString *)articleId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getArticlesByArticleIdWithGroupId:(long long)groupId articleId:(NSString *)articleId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"articleId": articleId,
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/get-articles-by-article-id": _params};
@@ -308,13 +328,23 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getArticlesByStructureIdWithGroupId:(long long)groupId ddmStructureKey:(NSString *)ddmStructureKey start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getArticlesByStructureIdWithGroupId:(long long)groupId ddmStructureKey:(NSString *)ddmStructureKey start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"ddmStructureKey": ddmStructureKey,
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/get-articles-by-structure-id": _params};
@@ -322,7 +352,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getArticlesByStructureIdWithGroupId:(long long)groupId classNameId:(long long)classNameId ddmStructureKey:(NSString *)ddmStructureKey status:(int)status start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getArticlesByStructureIdWithGroupId:(long long)groupId classNameId:(long long)classNameId ddmStructureKey:(NSString *)ddmStructureKey status:(int)status start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"classNameId": @(classNameId),
@@ -330,7 +370,7 @@
 		@"status": @(status),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/get-articles-by-structure-id": _params};
@@ -418,14 +458,24 @@
 	return (NSNumber *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getGroupArticlesWithGroupId:(long long)groupId userId:(long long)userId rootFolderId:(long long)rootFolderId start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)getGroupArticlesWithGroupId:(long long)groupId userId:(long long)userId rootFolderId:(long long)rootFolderId start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"userId": @(userId),
 		@"rootFolderId": @(rootFolderId),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/get-group-articles": _params};
@@ -433,7 +483,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getGroupArticlesWithGroupId:(long long)groupId userId:(long long)userId rootFolderId:(long long)rootFolderId status:(int)status start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)getGroupArticlesWithGroupId:(long long)groupId userId:(long long)userId rootFolderId:(long long)rootFolderId status:(int)status start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"userId": @(userId),
@@ -441,7 +501,7 @@
 		@"status": @(status),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/get-group-articles": _params};
@@ -602,7 +662,17 @@
 	[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId folderIds:(NSArray *)folderIds classNameId:(long long)classNameId keywords:(NSString *)keywords version:(NSDictionary *)version type:(NSString *)type ddmStructureKey:(NSString *)ddmStructureKey ddmTemplateKey:(NSString *)ddmTemplateKey displayDateGT:(long long)displayDateGT displayDateLT:(long long)displayDateLT status:(int)status reviewDate:(long long)reviewDate start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId folderIds:(NSArray *)folderIds classNameId:(long long)classNameId keywords:(NSString *)keywords version:(NSDictionary *)version type:(NSString *)type ddmStructureKey:(NSString *)ddmStructureKey ddmTemplateKey:(NSString *)ddmTemplateKey displayDateGT:(long long)displayDateGT displayDateLT:(long long)displayDateLT status:(int)status reviewDate:(long long)reviewDate start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupId": @(groupId),
@@ -619,7 +689,7 @@
 		@"reviewDate": @(reviewDate),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/search": _params};
@@ -627,7 +697,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId folderIds:(NSArray *)folderIds classNameId:(long long)classNameId articleId:(NSString *)articleId version:(NSDictionary *)version title:(NSString *)title description:(NSString *)description content:(NSString *)content type:(NSString *)type ddmStructureKey:(NSString *)ddmStructureKey ddmTemplateKey:(NSString *)ddmTemplateKey displayDateGT:(long long)displayDateGT displayDateLT:(long long)displayDateLT status:(int)status reviewDate:(long long)reviewDate andOperator:(BOOL)andOperator start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId folderIds:(NSArray *)folderIds classNameId:(long long)classNameId articleId:(NSString *)articleId version:(NSDictionary *)version title:(NSString *)title description:(NSString *)description content:(NSString *)content type:(NSString *)type ddmStructureKey:(NSString *)ddmStructureKey ddmTemplateKey:(NSString *)ddmTemplateKey displayDateGT:(long long)displayDateGT displayDateLT:(long long)displayDateLT status:(int)status reviewDate:(long long)reviewDate andOperator:(BOOL)andOperator start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupId": @(groupId),
@@ -648,7 +728,7 @@
 		@"andOperator": @(andOperator),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/search": _params};
@@ -656,7 +736,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId folderIds:(NSArray *)folderIds classNameId:(long long)classNameId articleId:(NSString *)articleId version:(NSDictionary *)version title:(NSString *)title description:(NSString *)description content:(NSString *)content type:(NSString *)type ddmStructureKeys:(NSArray *)ddmStructureKeys ddmTemplateKeys:(NSArray *)ddmTemplateKeys displayDateGT:(long long)displayDateGT displayDateLT:(long long)displayDateLT status:(int)status reviewDate:(long long)reviewDate andOperator:(BOOL)andOperator start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId folderIds:(NSArray *)folderIds classNameId:(long long)classNameId articleId:(NSString *)articleId version:(NSDictionary *)version title:(NSString *)title description:(NSString *)description content:(NSString *)content type:(NSString *)type ddmStructureKeys:(NSArray *)ddmStructureKeys ddmTemplateKeys:(NSArray *)ddmTemplateKeys displayDateGT:(long long)displayDateGT displayDateLT:(long long)displayDateLT status:(int)status reviewDate:(long long)reviewDate andOperator:(BOOL)andOperator start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupId": @(groupId),
@@ -677,7 +767,7 @@
 		@"andOperator": @(andOperator),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/journalarticle/search": _params};

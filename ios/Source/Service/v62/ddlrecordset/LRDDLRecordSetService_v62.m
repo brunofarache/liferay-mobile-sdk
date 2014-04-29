@@ -56,7 +56,17 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId keywords:(NSString *)keywords scope:(int)scope start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId keywords:(NSString *)keywords scope:(int)scope start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupId": @(groupId),
@@ -64,7 +74,7 @@
 		@"scope": @(scope),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/ddlrecordset/search": _params};
@@ -72,7 +82,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId name:(NSString *)name description:(NSString *)description scope:(int)scope andOperator:(BOOL)andOperator start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupId:(long long)groupId name:(NSString *)name description:(NSString *)description scope:(int)scope andOperator:(BOOL)andOperator start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupId": @(groupId),
@@ -82,7 +102,7 @@
 		@"andOperator": @(andOperator),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/ddlrecordset/search": _params};

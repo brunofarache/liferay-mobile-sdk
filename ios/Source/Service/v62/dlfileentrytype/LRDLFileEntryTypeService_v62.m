@@ -112,7 +112,17 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds keywords:(NSString *)keywords includeBasicFileEntryType:(BOOL)includeBasicFileEntryType start:(int)start end:(int)end orderByComparator:(NSDictionary *)orderByComparator error:(NSError **)error {
+- (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds keywords:(NSString *)keywords includeBasicFileEntryType:(BOOL)includeBasicFileEntryType start:(int)start end:(int)end orderByComparatorClassName:(NSString *)orderByComparatorClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([orderByComparatorClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = orderByComparatorClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@orderByComparator", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"companyId": @(companyId),
 		@"groupIds": groupIds,
@@ -120,7 +130,7 @@
 		@"includeBasicFileEntryType": @(includeBasicFileEntryType),
 		@"start": @(start),
 		@"end": @(end),
-		@"orderByComparator": orderByComparator
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/dlfileentrytype/search": _params};

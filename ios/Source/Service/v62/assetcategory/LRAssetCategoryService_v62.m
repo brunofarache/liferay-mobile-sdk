@@ -108,12 +108,22 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getChildCategoriesWithParentCategoryId:(long long)parentCategoryId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getChildCategoriesWithParentCategoryId:(long long)parentCategoryId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"parentCategoryId": @(parentCategoryId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-child-categories": _params};
@@ -135,12 +145,22 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSDictionary *)getJsonVocabularyCategoriesWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSDictionary *)getJsonVocabularyCategoriesWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-json-vocabulary-categories": _params};
@@ -148,14 +168,24 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSDictionary *)getJsonVocabularyCategoriesWithGroupId:(long long)groupId name:(NSString *)name vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSDictionary *)getJsonVocabularyCategoriesWithGroupId:(long long)groupId name:(NSString *)name vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"name": name,
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-json-vocabulary-categories": _params};
@@ -163,12 +193,22 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getVocabularyCategoriesWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getVocabularyCategoriesWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-categories": _params};
@@ -176,13 +216,23 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getVocabularyCategoriesWithParentCategoryId:(long long)parentCategoryId vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getVocabularyCategoriesWithParentCategoryId:(long long)parentCategoryId vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"parentCategoryId": @(parentCategoryId),
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-categories": _params};
@@ -190,14 +240,24 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getVocabularyCategoriesWithGroupId:(long long)groupId name:(NSString *)name vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getVocabularyCategoriesWithGroupId:(long long)groupId name:(NSString *)name vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"name": name,
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-categories": _params};
@@ -228,12 +288,22 @@
 	return (NSNumber *)[self.session invoke:_command error:error];
 }
 
-- (NSDictionary *)getVocabularyCategoriesDisplayWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSDictionary *)getVocabularyCategoriesDisplayWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-categories-display": _params};
@@ -241,14 +311,24 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSDictionary *)getVocabularyCategoriesDisplayWithGroupId:(long long)groupId name:(NSString *)name vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSDictionary *)getVocabularyCategoriesDisplayWithGroupId:(long long)groupId name:(NSString *)name vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"name": name,
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-categories-display": _params};
@@ -256,12 +336,22 @@
 	return (NSDictionary *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getVocabularyRootCategoriesWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getVocabularyRootCategoriesWithVocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-root-categories": _params};
@@ -269,13 +359,23 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)getVocabularyRootCategoriesWithGroupId:(long long)groupId vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)getVocabularyRootCategoriesWithGroupId:(long long)groupId vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/get-vocabulary-root-categories": _params};
@@ -335,14 +435,24 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
-- (NSArray *)searchWithGroupId:(long long)groupId keywords:(NSString *)keywords vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obc:(NSDictionary *)obc error:(NSError **)error {
+- (NSArray *)searchWithGroupId:(long long)groupId keywords:(NSString *)keywords vocabularyId:(long long)vocabularyId start:(int)start end:(int)end obcClassName:(NSString *)obcClassName error:(NSError **)error {
+	NSString *comparatorPrefix = @"-";
+	NSString *comparatorValue = @"";
+
+	if ([obcClassName hasPrefix:@"com.liferay"]) {
+		comparatorPrefix = @"%2B";
+		comparatorValue = obcClassName;
+	}
+
+	NSString *comparatorKey = [NSString stringWithFormat:@"%@obc", comparatorPrefix];
+
 	NSDictionary *_params = @{
 		@"groupId": @(groupId),
 		@"keywords": keywords,
 		@"vocabularyId": @(vocabularyId),
 		@"start": @(start),
 		@"end": @(end),
-		@"obc": obc
+		comparatorKey: comparatorValue
 	};
 
 	NSDictionary *_command = @{@"/assetcategory/search": _params};

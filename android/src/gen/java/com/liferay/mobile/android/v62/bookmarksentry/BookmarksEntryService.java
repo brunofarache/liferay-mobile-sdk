@@ -89,7 +89,17 @@ public class BookmarksEntryService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getEntries(long groupId, long folderId, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray getEntries(long groupId, long folderId, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -99,7 +109,7 @@ public class BookmarksEntryService extends BaseService {
 			_params.put("folderId", folderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/bookmarksentry/get-entries", _params);
 		}

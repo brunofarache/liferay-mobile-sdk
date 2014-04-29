@@ -74,7 +74,18 @@ public class DLAppServiceTest extends BaseTest {
 		deleteFoldersBatch(batch);
 	}
 
-	public void deleteFolder() throws Exception {
+	@Test
+	public void getFoldersWithComparator() throws Exception {
+		testGetFoldersWithComparator(
+			"com.liferay.portlet.documentlibrary.util.comparator.FolderIdComparator");
+	}
+
+	@Test
+	public void getFoldersWithNullComparator() throws Exception {
+		testGetFoldersWithComparator(null);
+	}
+
+	protected void deleteFolder() throws Exception {
 		DLAppService service = new DLAppService(session);
 
 		service.deleteFolder(
@@ -93,7 +104,7 @@ public class DLAppServiceTest extends BaseTest {
 		}
 	}
 
-	public void deleteFoldersBatch(BatchSessionImpl batch) throws Exception {
+	protected void deleteFoldersBatch(BatchSessionImpl batch) throws Exception {
 		DLAppService service = new DLAppService(batch);
 
 		service.deleteFolder(
@@ -105,6 +116,38 @@ public class DLAppServiceTest extends BaseTest {
 		JSONArray jsonArray = batch.invoke();
 
 		assertEquals(2, jsonArray.length());
+	}
+
+	protected void testGetFoldersWithComparator(String comparatorClassName)
+		throws Exception {
+
+		DLAppService service = new DLAppService(session);
+
+		JSONArray existingFolders = service.getFolders(
+			_getRepositoryId(), _PARENT_FOLDER_ID, 0, 5, comparatorClassName);
+
+		assertNotNull(existingFolders);
+
+		service.addFolder(
+			_getRepositoryId(), _PARENT_FOLDER_ID, _FOLDER_NAME, "", null);
+
+		service.addFolder(
+			_getRepositoryId(), _PARENT_FOLDER_ID, _FOLDER_NAME_2, "", null);
+
+		JSONArray newFolders = service.getFolders(
+			_getRepositoryId(), _PARENT_FOLDER_ID, 0, 5, comparatorClassName);
+
+		assertNotNull(newFolders);
+
+		assertEquals(existingFolders.length() + 2, newFolders.length());
+
+		JSONObject folder1 = newFolders.getJSONObject(newFolders.length() - 2);
+		JSONObject folder2 = newFolders.getJSONObject(newFolders.length() - 1);
+
+		assertEquals(_FOLDER_NAME, folder1.get("name").toString());
+		assertEquals(_FOLDER_NAME_2, folder2.get("name").toString());
+
+		deleteFoldersBatch(new BatchSessionImpl(session));
 	}
 
 	private long _getRepositoryId() {

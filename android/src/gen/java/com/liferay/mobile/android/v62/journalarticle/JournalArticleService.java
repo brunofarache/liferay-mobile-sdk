@@ -385,7 +385,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getArticles(long groupId, long folderId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getArticles(long groupId, long folderId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -395,7 +405,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("folderId", folderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/get-articles", _params);
 		}
@@ -406,7 +416,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getArticlesByArticleId(long groupId, String articleId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getArticlesByArticleId(long groupId, String articleId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -416,7 +436,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("articleId", articleId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/get-articles-by-article-id", _params);
 		}
@@ -445,7 +465,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getArticlesByStructureId(long groupId, String ddmStructureKey, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getArticlesByStructureId(long groupId, String ddmStructureKey, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -455,7 +485,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("ddmStructureKey", ddmStructureKey);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/get-articles-by-structure-id", _params);
 		}
@@ -466,7 +496,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getArticlesByStructureId(long groupId, long classNameId, String ddmStructureKey, int status, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getArticlesByStructureId(long groupId, long classNameId, String ddmStructureKey, int status, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -478,7 +518,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/get-articles-by-structure-id", _params);
 		}
@@ -618,7 +658,17 @@ public class JournalArticleService extends BaseService {
 		return (Integer)session.invoke(_command);
 	}
 
-	public JSONArray getGroupArticles(long groupId, long userId, long rootFolderId, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray getGroupArticles(long groupId, long userId, long rootFolderId, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -629,7 +679,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("rootFolderId", rootFolderId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/get-group-articles", _params);
 		}
@@ -640,7 +690,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getGroupArticles(long groupId, long userId, long rootFolderId, int status, int start, int end, JSONObject orderByComparator) throws Exception {
+	public JSONArray getGroupArticles(long groupId, long userId, long rootFolderId, int status, int start, int end, String orderByComparatorClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (orderByComparatorClassName != null && orderByComparatorClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = orderByComparatorClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "orderByComparator";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -652,7 +712,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("status", status);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("orderByComparator", orderByComparator);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/get-group-articles", _params);
 		}
@@ -907,7 +967,17 @@ public class JournalArticleService extends BaseService {
 		session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, long groupId, JSONArray folderIds, long classNameId, String keywords, JSONObject version, String type, String ddmStructureKey, String ddmTemplateKey, long displayDateGT, long displayDateLT, int status, long reviewDate, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, long groupId, JSONArray folderIds, long classNameId, String keywords, JSONObject version, String type, String ddmStructureKey, String ddmTemplateKey, long displayDateGT, long displayDateLT, int status, long reviewDate, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -928,7 +998,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("reviewDate", reviewDate);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/search", _params);
 		}
@@ -939,7 +1009,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, long groupId, JSONArray folderIds, long classNameId, String articleId, JSONObject version, String title, String description, String content, String type, String ddmStructureKey, String ddmTemplateKey, long displayDateGT, long displayDateLT, int status, long reviewDate, boolean andOperator, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, long groupId, JSONArray folderIds, long classNameId, String articleId, JSONObject version, String title, String description, String content, String type, String ddmStructureKey, String ddmTemplateKey, long displayDateGT, long displayDateLT, int status, long reviewDate, boolean andOperator, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -964,7 +1044,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("andOperator", andOperator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/search", _params);
 		}
@@ -975,7 +1055,17 @@ public class JournalArticleService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray search(long companyId, long groupId, JSONArray folderIds, long classNameId, String articleId, JSONObject version, String title, String description, String content, String type, JSONArray ddmStructureKeys, JSONArray ddmTemplateKeys, long displayDateGT, long displayDateLT, int status, long reviewDate, boolean andOperator, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray search(long companyId, long groupId, JSONArray folderIds, long classNameId, String articleId, JSONObject version, String title, String description, String content, String type, JSONArray ddmStructureKeys, JSONArray ddmTemplateKeys, long displayDateGT, long displayDateLT, int status, long reviewDate, boolean andOperator, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -1000,7 +1090,7 @@ public class JournalArticleService extends BaseService {
 			_params.put("andOperator", andOperator);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/journalarticle/search", _params);
 		}

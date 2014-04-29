@@ -5,7 +5,7 @@
 	#set ($parameterList = "")
 
 	#foreach ($parameter in $parameters)
-		#set ($parameterName = $parameter.name)
+		#set ($parameterName = $languageUtil.getParamName($parameter.name, $parameter.type))
 		#set ($parameterType = $languageUtil.getType($parameter.type))
 		#set ($parameterList = "$parameterList$parameterType $parameterName")
 
@@ -30,7 +30,7 @@
 	#end
 
 	#foreach ($parameter in $parameters)
-		#set ($parameterName = $parameter.name)
+		#set ($parameterName = $languageUtil.getParamName($parameter.name, $parameter.type))
 		#set ($parameterType = $languageUtil.getType($parameter.type))
 		#set ($prefix = " $parameterName:")
 

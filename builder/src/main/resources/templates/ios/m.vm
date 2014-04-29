@@ -34,13 +34,33 @@ ${esc.h}import "${className}.h"
 
 	#objectiveCMethodSignature($action " {")
 
+	#set ($comparatorParam = $languageUtil.getComparatorParam($parameters))
+	#if ("$!comparatorParam" != "")
+		#set ($comparatorVariable = $languageUtil.getParamName($comparatorParam.name, $comparatorParam.type))
+
+		##t	NSString *comparatorPrefix = @"-";
+		##t	NSString *comparatorValue = @"";
+		##n
+		##t	if ([$comparatorVariable hasPrefix:@"com.liferay"]) {
+		##t		comparatorPrefix = @"%2B";
+		##t		comparatorValue = $comparatorVariable;
+		##t	}
+		##n
+		##t	NSString *comparatorKey = [NSString stringWithFormat:@"%@$comparatorParam.name", comparatorPrefix];
+		##n
+	#end
+
 	##t	NSDictionary *_params = @{
 
 	#foreach ($param in $parameters)
-		#set ($paramName = $param.name)
+		#set ($paramName = $languageUtil.getParamName($param.name, $param.type))
 		#set ($paramValue = $languageUtil.getParamValue($paramName, $param.type))
 
-		#set ($line = "@${esc.q}$paramName${esc.q}: $paramValue")
+		#if ($paramValue == $comparatorVariable)
+			#set ($line = "comparatorKey: comparatorValue")
+		#else
+			#set ($line = "@${esc.q}$param.name${esc.q}: $paramValue")
+		#end
 
 		#if ($foreach.hasNext)
 			#set ($line = "$line,")
@@ -68,6 +88,8 @@ ${esc.h}import "${className}.h"
 	}
 
 	##n
+
+	#set ($comparatorParam = "")
 #end
 
 @end

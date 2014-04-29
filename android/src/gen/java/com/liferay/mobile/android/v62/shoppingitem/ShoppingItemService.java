@@ -158,7 +158,17 @@ public class ShoppingItemService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getItems(long groupId, long categoryId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getItems(long groupId, long categoryId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -168,7 +178,7 @@ public class ShoppingItemService extends BaseService {
 			_params.put("categoryId", categoryId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/shoppingitem/get-items", _params);
 		}
@@ -197,14 +207,24 @@ public class ShoppingItemService extends BaseService {
 		return (Integer)session.invoke(_command);
 	}
 
-	public JSONArray getItemsPrevAndNext(long itemId, JSONObject obc) throws Exception {
+	public JSONArray getItemsPrevAndNext(long itemId, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
 			JSONObject _params = new JSONObject();
 
 			_params.put("itemId", itemId);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/shoppingitem/get-items-prev-and-next", _params);
 		}

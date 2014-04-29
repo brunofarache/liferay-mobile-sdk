@@ -100,7 +100,17 @@ public class AssetTagService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getGroupTags(long groupId, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getGroupTags(long groupId, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -109,7 +119,7 @@ public class AssetTagService extends BaseService {
 			_params.put("groupId", groupId);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assettag/get-group-tags", _params);
 		}
@@ -290,7 +300,17 @@ public class AssetTagService extends BaseService {
 		return (JSONArray)session.invoke(_command);
 	}
 
-	public JSONArray getTags(long groupId, long classNameId, String name, int start, int end, JSONObject obc) throws Exception {
+	public JSONArray getTags(long groupId, long classNameId, String name, int start, int end, String obcClassName) throws Exception {
+		String comparatorPrefix = "-";
+		String comparatorValue = "";
+
+		if (obcClassName != null && obcClassName.startsWith("com.liferay")) {
+			comparatorPrefix = "%2B";
+			comparatorValue = obcClassName;
+		}
+
+		String comparatorKey = comparatorPrefix + "obc";
+
 		JSONObject _command = new JSONObject();
 
 		try {
@@ -301,7 +321,7 @@ public class AssetTagService extends BaseService {
 			_params.put("name", name);
 			_params.put("start", start);
 			_params.put("end", end);
-			_params.put("obc", obc);
+			_params.put(comparatorKey, comparatorValue);
 
 			_command.put("/assettag/get-tags", _params);
 		}
