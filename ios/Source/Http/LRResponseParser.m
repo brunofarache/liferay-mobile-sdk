@@ -16,6 +16,7 @@
 
 #import "LRBatchSession.h"
 #import "NSError+LRError.h"
+#import "NSBundle+Localization.h"
 
 const int LR_HTTP_STATUS_OK = 200;
 const int LR_HTTP_STATUS_UNAUTHORIZED = 401;
@@ -51,10 +52,10 @@ const int LR_HTTP_STATUS_UNAUTHORIZED = 401;
 
 	if (statusCode == LR_HTTP_STATUS_UNAUTHORIZED) {
 		error = [NSError errorWithCode:LRErrorCodeUnauthorized
-			description:@"wrong-credentials"];
+			descriptionKey:@"wrong-credentials"];
 	}
 	else if (statusCode != LR_HTTP_STATUS_OK) {
-		error = [NSError errorWithCode:statusCode description:@"http-error"];
+		error = [NSError errorWithCode:statusCode descriptionKey:@"http-error"];
 	}
 
 	return error;
@@ -74,20 +75,77 @@ const int LR_HTTP_STATUS_UNAUTHORIZED = 401;
 	NSString *message = [json objectForKey:@"message"];
 	NSError *error;
 
-	if (message) {
-		NSDictionary *userInfo = @{
-			NSLocalizedFailureReasonErrorKey: exception
-		};
+	// Both message and exception could contain an exception class name or a
+	// user message (in English).
 
-		error = [NSError errorWithCode:LRErrorCodePortalException
-			description:message userInfo:userInfo];
+	if ([self _looksLikeException:message]) {
+		if ([exception length] == 0) {
+
+			// use message as exception classname. No message provided
+
+			exception = message;
+			message = nil;
+		}
+		else {
+
+			// message and exception are reversed. Swap
+
+			NSString *tmp = exception;
+			exception = message;
+			message = tmp;
+		}
+	}
+
+	if ([message length] == 0) {
+		error = [self _errorWithException:exception];
 	}
 	else {
-		error = [NSError errorWithCode:LRErrorCodePortalException
-			description:exception];
+		error = [self _errorWithException:exception message:message];
 	}
 
 	return error;
+}
+
++ (NSError *)_errorWithException:(NSString *)exception {
+	NSError *error;
+
+	if ([exception length] == 0) {
+
+		// Neither message nor exception. Throw generic error
+
+		error = [NSError errorWithCode:LRErrorCodePortalException
+			descriptionKey:@"exception-error-generic"];
+	}
+	else {
+
+		// Exception is a class name or server-side user message
+		// Wrap it and try to convert the exception to a user message
+
+		error = [self _wrapErrorAndTryToTranslateString:exception];
+	}
+
+	return error;
+}
+
++ (NSError *)_errorWithException:(NSString *)exception
+		message:(NSString *)message {
+
+	NSString *keyToUse = @"exception-error-generic";
+
+	if ([self _looksLikeException:exception]) {
+
+		// Exception is a class name.
+		keyToUse = exception;
+	}
+
+	// Wrap it (inclusing server-side message) and try to convert class name
+	// to user message
+	return [self _wrapErrorAndTryToTranslateString:keyToUse
+		serverMessage:message];
+}
+
++ (BOOL)_looksLikeException:(NSString *)value {
+	return [value hasPrefix:@"java.lang."] || [value hasPrefix:@"com.liferay."];
 }
 
 + (id)_parse:(NSData *)data error:(NSError **)error {
@@ -102,7 +160,7 @@ const int LR_HTTP_STATUS_UNAUTHORIZED = 401;
 		};
 
 		*error = [NSError errorWithCode:LRErrorCodeParse
-			description:@"json-parsing-error" userInfo:userInfo];
+			descriptionKey:@"json-parsing-error" userInfo:userInfo];
 	}
 	else {
 		*error = [self _checkPortalException:json];
@@ -113,6 +171,57 @@ const int LR_HTTP_STATUS_UNAUTHORIZED = 401;
 	}
 
 	return json;
+}
+
++ (NSError *)_wrapErrorAndTryToTranslateString:(NSString *)exception {
+	return [self _wrapErrorAndTryToTranslateString:exception serverMessage:nil];
+}
+
++ (NSError *)_wrapErrorAndTryToTranslateString:(NSString *)exception
+		serverMessage:(NSString *)serverMessage {
+
+	// If there is translation for the key, use it. Otherwise return error with
+	// generic message. Always wrap original error
+
+	NSError *wrappedError =
+		[self _wrapErrorWithException:exception message:serverMessage];
+
+	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+
+	userInfo[NSUnderlyingErrorKey] = wrappedError;
+
+	if ([self _looksLikeException:exception]) {
+		userInfo[NSLocalizedFailureReasonErrorKey] = exception;
+	}
+
+	NSString *keyToUse = @"exception-error-generic";
+
+	if ([[NSBundle localizedBundle] existsStringForKey:exception]) {
+		keyToUse = exception;
+	}
+
+	return [NSError errorWithCode:LRErrorCodePortalException
+		descriptionKey:keyToUse userInfo:userInfo];
+}
+
++ (NSError *)_wrapErrorWithException:(NSString *)exception
+		message:(NSString *)message {
+
+	NSError *wrappedError;
+	NSMutableDictionary *originalUserInfo = [[NSMutableDictionary alloc] init];
+
+	if ([self _looksLikeException:exception]) {
+		originalUserInfo[NSLocalizedFailureReasonErrorKey] = exception;
+
+		wrappedError = [NSError errorWithCode:LRErrorCodePortalException
+			description:message userInfo:originalUserInfo];
+	}
+	else {
+		wrappedError = [NSError errorWithCode:LRErrorCodePortalException
+			description:exception userInfo:originalUserInfo];
+	}
+
+	return wrappedError;
 }
 
 @end

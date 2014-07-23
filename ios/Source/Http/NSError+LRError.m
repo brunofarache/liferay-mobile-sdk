@@ -13,6 +13,7 @@
  */
 
 #import "NSError+LRError.h"
+#import "NSBundle+Localization.h"
 
 NSString *const LR_ERROR_DOMAIN = @"com.liferay.mobile.sdk";
 
@@ -21,21 +22,67 @@ NSString *const LR_ERROR_DOMAIN = @"com.liferay.mobile.sdk";
  */
 @implementation NSError (LRError)
 
-+ (NSError *)errorWithCode:(LRErrorCode)code
++ (instancetype)errorWithCode:(LRErrorCode)code
 		description:(NSString *)description {
 
 	return [self errorWithCode:code description:description userInfo:nil];
 }
 
-+ (NSError *)errorWithCode:(LRErrorCode)code description:(NSString *)description
-		userInfo:(NSDictionary *)userInfo {
++ (instancetype)errorWithCode:(LRErrorCode)code description:(NSString *)
+		description userInfo:(NSDictionary *)userInfo {
 
 	NSMutableDictionary *values = [[NSMutableDictionary alloc]
 		initWithDictionary:userInfo];
 
-	[values setObject:description forKey:NSLocalizedDescriptionKey];
+	values[NSLocalizedDescriptionKey] = description ?: @"";
 
 	return [self errorWithDomain:LR_ERROR_DOMAIN code:code userInfo:values];
+}
+
++ (instancetype)errorWithCode:(LRErrorCode)code
+		descriptionKey:(NSString *)descriptionKey {
+
+	return [self errorWithCode:code descriptionKey:descriptionKey userInfo:nil];
+}
+
++ (instancetype)errorWithCode:(LRErrorCode)code descriptionKey:(NSString *)
+		descriptionKey userInfo:(NSDictionary *)userInfo {
+
+	NSString *description =
+		[[NSBundle localizedBundle] localizedStringForKey:descriptionKey];
+
+	return [self errorWithCode:code description:description userInfo:userInfo];
+}
+
++ (instancetype)errorWithError:(NSError *)underlyingError {
+	NSInteger errorCode;
+	NSString *descriptionKey;
+
+	if ([underlyingError.domain isEqualToString:NSURLErrorDomain]) {
+		switch (underlyingError.code) {
+			case NSURLErrorCannotFindHost:
+			case NSURLErrorCannotConnectToHost:
+			case NSURLErrorNetworkConnectionLost:
+			case NSURLErrorDNSLookupFailed:
+			case NSURLErrorNotConnectedToInternet:
+				errorCode = LRErrorCodeNotConnected;
+				descriptionKey = @"request-error-not-connected";
+				break;
+			default:
+				errorCode = LRErrorCodeRequest;
+				descriptionKey = @"request-error";
+				break;
+		}
+	}
+	else {
+		errorCode = LRErrorCodeUnknown;
+		descriptionKey = @"error-unknown";
+	}
+
+	NSDictionary *userInfo = @{NSUnderlyingErrorKey : underlyingError};
+
+	return [self errorWithCode:errorCode descriptionKey:descriptionKey
+		userInfo:userInfo];
 }
 
 @end

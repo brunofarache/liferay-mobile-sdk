@@ -16,6 +16,7 @@
 
 #import "LRBatchSession.h"
 #import "LRResponseParser.h"
+#import "NSError+LRError.h"
 
 NSString *const LR_GET = @"GET";
 NSString *const LR_HEAD = @"HEAD";
@@ -95,11 +96,13 @@ typedef void (^LRHandler)(NSURLResponse *response, NSData *data, NSError *error)
 	}
 	else {
 		NSHTTPURLResponse *response;
+		NSError *requestError;
 
 		NSData *data = [NSURLConnection sendSynchronousRequest:request
-			returningResponse:&response error:error];
+			returningResponse:&response error:&requestError];
 
-		if (*error) {
+		if (requestError) {
+			*error = [NSError errorWithError:requestError];
 			return nil;
 		}
 

@@ -83,9 +83,9 @@
 	XCTAssertEqualObjects(exception, error.userInfo[NSLocalizedDescriptionKey]);
 }
 
-- (void)testPortalExceptionWithMessage {
-	NSString *message = @"Message";
-	NSString *exception = @"com.liferay.Exception";
+- (void)testPortalUnrecognizedExceptionWithMessage {
+	NSString *message = @"Server side message";
+	NSString *exception = @"com.liferay.UnrecognizedException";
 
 	NSDictionary *json = @{
 		@"message": message,
@@ -105,11 +105,60 @@
 	XCTAssertEqualObjects(LR_ERROR_DOMAIN, error.domain);
 	XCTAssertEqual(LRErrorCodePortalException, error.code);
 	XCTAssertNotNil(error.userInfo);
-	XCTAssertEqualObjects(message, error.userInfo[NSLocalizedDescriptionKey]);
-
 	XCTAssertEqualObjects(
-		exception, error.userInfo[NSLocalizedFailureReasonErrorKey]
-	);
+		@"The server returned an unknown exception.",
+		error.localizedDescription,
+		"Error message mismatch. Is the simulator configured to use English?");
+	XCTAssertEqualObjects(
+		exception, error.userInfo[NSLocalizedFailureReasonErrorKey]);
+
+	NSError *underlyingError = error.userInfo[NSUnderlyingErrorKey];
+
+	XCTAssertNotNil(underlyingError);
+	XCTAssertNotNil(underlyingError.userInfo);
+	XCTAssertEqualObjects(
+		exception, error.userInfo[NSLocalizedFailureReasonErrorKey]);
+	XCTAssertEqualObjects(
+		message, underlyingError.localizedDescription);
+}
+
+- (void)testPortalRecognizedExceptionWithMessage {
+	NSString *message = @"Server side message";
+	NSString *exception = @"com.liferay.portal.NoSuchUserException";
+
+	NSDictionary *json = @{
+		@"message": message,
+		@"exception": exception
+	};
+
+	NSError *error;
+	NSData *data = [NSJSONSerialization dataWithJSONObject:json options:0
+		error:&error];
+
+	id response = [LRResponseParser parse:data statusCode:LR_HTTP_STATUS_OK
+		error:&error];
+
+	XCTAssertNil(response);
+
+	XCTAssertNotNil(error);
+	XCTAssertEqualObjects(LR_ERROR_DOMAIN, error.domain);
+	XCTAssertEqual(LRErrorCodePortalException, error.code);
+	XCTAssertNotNil(error.userInfo);
+	XCTAssertEqualObjects(
+		@"The user couldn't be found in the server.",
+		error.localizedDescription,
+		"Error message mismatch. Is the simulator configured to use English?");
+	XCTAssertEqualObjects(
+		exception, error.userInfo[NSLocalizedFailureReasonErrorKey]);
+
+	NSError *underlyingError = error.userInfo[NSUnderlyingErrorKey];
+
+	XCTAssertNotNil(underlyingError);
+	XCTAssertNotNil(underlyingError.userInfo);
+	XCTAssertEqualObjects(
+		exception, error.userInfo[NSLocalizedFailureReasonErrorKey]);
+	XCTAssertEqualObjects(
+		message, underlyingError.localizedDescription);
 }
 
 - (void)testUnauthorizedError {

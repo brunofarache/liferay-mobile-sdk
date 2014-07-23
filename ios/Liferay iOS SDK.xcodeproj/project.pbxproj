@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8837B96019741D9800410076 /* UnauthenticatedServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8837B95F19741D9800410076 /* UnauthenticatedServiceTest.m */; };
 		883F77731977DE990041E1CB /* ResponseParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F77721977DE990041E1CB /* ResponseParserTest.m */; };
+		88C0C867197E7BC00068ACA5 /* NSBundle+Localization.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C0C866197E7BC00068ACA5 /* NSBundle+Localization.m */; };
+		88C0C868197E7BC00068ACA5 /* NSBundle+Localization.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C0C866197E7BC00068ACA5 /* NSBundle+Localization.m */; };
+		88C0C86D197E7BCC0068ACA5 /* UserMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 88C0C86A197E7BCC0068ACA5 /* UserMessages.strings */; };
+		88C0C878197ECB360068ACA5 /* ExceptionMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 88C0C876197ECB360068ACA5 /* ExceptionMessages.strings */; };
 		8F7B829DA4104FEDB903590F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 792F68BAE4DF41869F1F1580 /* libPods.a */; };
 		CC03FB6F18ED7BA000F3F16C /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC03FB6C18ED7BA000F3F16C /* settings.plist */; };
 		CC03FCA418ED7DCD00F3F16C /* LRBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = CC03FB7418ED7DCC00F3F16C /* LRBaseService.m */; };
@@ -168,6 +172,12 @@
 		792F68BAE4DF41869F1F1580 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8837B95F19741D9800410076 /* UnauthenticatedServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnauthenticatedServiceTest.m; sourceTree = "<group>"; };
 		883F77721977DE990041E1CB /* ResponseParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseParserTest.m; sourceTree = "<group>"; };
+		88C0C865197E7BC00068ACA5 /* NSBundle+Localization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBundle+Localization.h"; path = "Source/Localization/NSBundle+Localization.h"; sourceTree = SOURCE_ROOT; };
+		88C0C866197E7BC00068ACA5 /* NSBundle+Localization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+Localization.m"; path = "Source/Localization/NSBundle+Localization.m"; sourceTree = SOURCE_ROOT; };
+		88C0C86B197E7BCC0068ACA5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UserMessages.strings; sourceTree = "<group>"; };
+		88C0C86C197E7BCC0068ACA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UserMessages.strings; sourceTree = "<group>"; };
+		88C0C877197ECB360068ACA5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ExceptionMessages.strings; sourceTree = "<group>"; };
+		88C0C879197ECB3E0068ACA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ExceptionMessages.strings; sourceTree = "<group>"; };
 		88FD86C519742C4700E4EEF9 /* GroupServiceTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupServiceTest.h; sourceTree = "<group>"; };
 		CC03FB6C18ED7BA000F3F16C /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		CC03FB6D18ED7BA000F3F16C /* Test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Test-Info.plist"; sourceTree = "<group>"; };
@@ -441,6 +451,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88C0C869197E7BCC0068ACA5 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				88C0C876197ECB360068ACA5 /* ExceptionMessages.strings */,
+				88C0C86A197E7BCC0068ACA5 /* UserMessages.strings */,
+			);
+			name = Strings;
+			path = Source/Localization/Strings;
+			sourceTree = SOURCE_ROOT;
+		};
+		88D713DF197D74BA0033D68E /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				88C0C869197E7BCC0068ACA5 /* Strings */,
+				88C0C865197E7BC00068ACA5 /* NSBundle+Localization.h */,
+				88C0C866197E7BC00068ACA5 /* NSBundle+Localization.m */,
+			);
+			name = Localization;
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CC03FB6B18ED7BA000F3F16C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,6 +490,7 @@
 				CC03FB7C18ED7DCC00F3F16C /* Http */,
 				CC03FB7F18ED7DCC00F3F16C /* Service */,
 				CC03FCA118ED7DCD00F3F16C /* Util */,
+				88D713DF197D74BA0033D68E /* Localization */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -1631,6 +1663,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 			);
 			mainGroup = CCA6593818EC4BE800957D20;
 			productRefGroup = CCA6594218EC4BE800957D20 /* Products */;
@@ -1648,6 +1681,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88C0C878197ECB360068ACA5 /* ExceptionMessages.strings in Resources */,
+				88C0C86D197E7BCC0068ACA5 /* UserMessages.strings in Resources */,
 				CC4B7A2F1938C47F003611C4 /* logo.png in Resources */,
 				CC03FB6F18ED7BA000F3F16C /* settings.plist in Resources */,
 			);
@@ -1706,6 +1741,7 @@
 				CC03FCAC18ED7DCD00F3F16C /* LRAnnouncementsFlagService_v62.m in Sources */,
 				CC03FCB418ED7DCD00F3F16C /* LRBlogsEntryService_v62.m in Sources */,
 				CC03FD2718EDA05B00F3F16C /* GroupServiceTest.m in Sources */,
+				88C0C868197E7BC00068ACA5 /* NSBundle+Localization.m in Sources */,
 				CC03FCE818ED7DCD00F3F16C /* LRPollsVoteService_v62.m in Sources */,
 				CC03FCC418ED7DCD00F3F16C /* LRDLFolderService_v62.m in Sources */,
 				CC03FCB918ED7DCD00F3F16C /* LRContactService_v62.m in Sources */,
@@ -1825,6 +1861,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88C0C867197E7BC00068ACA5 /* NSBundle+Localization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1837,6 +1874,27 @@
 			targetProxy = CC677D3318EC511900F3DFAB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		88C0C86A197E7BCC0068ACA5 /* UserMessages.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88C0C86B197E7BCC0068ACA5 /* en */,
+				88C0C86C197E7BCC0068ACA5 /* es */,
+			);
+			name = UserMessages.strings;
+			sourceTree = "<group>";
+		};
+		88C0C876197ECB360068ACA5 /* ExceptionMessages.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				88C0C877197ECB360068ACA5 /* en */,
+				88C0C879197ECB3E0068ACA5 /* es */,
+			);
+			name = ExceptionMessages.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CC677D3618EC511900F3DFAB /* Debug */ = {
