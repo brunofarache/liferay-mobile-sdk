@@ -39,15 +39,15 @@ public class SDKBuilder {
 
 	public static void build(
 			String platform, String url, String context, String packageName,
-			String destination)
+			int version, String destination)
 		throws Exception {
 
-		build(platform, url, context, packageName, null, destination);
+		build(platform, url, context, packageName, version, null, destination);
 	}
 
 	public static void build(
 			String platform, String url, String context, String packageName,
-			String filter, String destination)
+			int version, String filter, String destination)
 		throws Exception {
 
 		Discovery discovery = discover(url, context, filter);
@@ -60,8 +60,6 @@ public class SDKBuilder {
 		else if (platform.equals(IOS)) {
 			builder = new iOSBuilder();
 		}
-
-		int version = HttpUtil.getPortalVersion(url);
 
 		if (Validator.isNull(filter)) {
 			builder.buildAll(discovery, packageName, version, destination);
@@ -110,9 +108,13 @@ public class SDKBuilder {
 		String packageName = arguments.get("packageName");
 		String filter = arguments.get("filter");
 		String destination = arguments.get("destination");
-
+		String version = arguments.get("version");
+		
+		int versionNumber = Integer.valueOf(version.replace(".", ""));
+		
 		try {
-			build(platform, url, context, packageName, filter, destination);
+			build(platform, url, context, packageName, versionNumber, filter, 
+				destination);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
