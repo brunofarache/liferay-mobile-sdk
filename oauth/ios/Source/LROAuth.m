@@ -29,7 +29,7 @@
 		self.consumerKey = consumerKey;
 		self.consumerSecret = consumerSecret;
 		self.token = token;
-		self.tokenSecret = tokenSecret;
+		self.tokenSecret = tokenSecret ? tokenSecret : @"";
 
 		self.params = @{
 			@"oauth_consumer_key": self.consumerKey,
@@ -48,6 +48,42 @@
 }
 
 - (void)authenticate:(NSMutableURLRequest *)request {
+}
+
+- (NSString *)signatureBase:(NSString *)method url:(NSString *)url
+		params:(NSDictionary *)params {
+
+	NSArray *sortedKeys = [[params allKeys]
+		sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+
+	NSMutableString *paramsString = [NSMutableString string];
+
+	for (int i = 0; i < [sortedKeys count]; i++) {
+		if (i > 0) {
+			[paramsString appendString:@"&"];
+		}
+
+		NSString *key = sortedKeys[i];
+		[paramsString appendFormat:@"%@=%@", key, params[key]];
+	}
+
+	NSString *signatureBase = [NSString stringWithFormat:@"%@&%@&%@",
+		method, [self _escape:url], [self _escape:paramsString]];
+
+	return signatureBase;
+}
+
+- (NSString *)_escape:(NSString *)string {
+	NSString *escape = @":/?&=;+!@#$()',*";
+	NSString *ignore = @"[].";
+
+	return (__bridge_transfer NSString *)
+		CFURLCreateStringByAddingPercentEscapes(
+			kCFAllocatorDefault,
+			(__bridge CFStringRef)string,
+			(__bridge CFStringRef)ignore,
+			(__bridge CFStringRef)escape,
+			CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
 }
 
 - (NSString *)_getNonce {

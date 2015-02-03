@@ -30,4 +30,7 @@
 	consumerSecret:(NSString *)consumerSecret token:(NSString *)token
 	tokenSecret:(NSString *)tokenSecret;
 
+- (NSString *)signatureBase:(NSString *)method url:(NSString *)url
+	params:(NSDictionary *)params;
+
 @end
