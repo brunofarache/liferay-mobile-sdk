@@ -21,13 +21,15 @@
 
 @property (nonatomic, strong) NSString *consumerKey;
 @property (nonatomic, strong) NSString *consumerSecret;
-@property (nonatomic, strong) NSDictionary *params;
+@property (nonatomic, strong) NSDictionary *oauthParams;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *tokenSecret;
 
 - (id)initWithConsumerKey:(NSString *)consumerKey
 	consumerSecret:(NSString *)consumerSecret token:(NSString *)token
 	tokenSecret:(NSString *)tokenSecret;
+
+- (NSString *)getAuthorizationHeaderForRequest:(NSMutableURLRequest *)request;
 
 - (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
 	params:(NSDictionary *)params;

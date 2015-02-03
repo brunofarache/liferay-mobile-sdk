@@ -33,7 +33,7 @@
 		self.token = token;
 		self.tokenSecret = tokenSecret ? tokenSecret : @"";
 
-		self.params = @{
+		self.oauthParams = @{
 			@"oauth_consumer_key": self.consumerKey,
 			@"oauth_nonce": [self _getNonce],
 			@"oauth_timestamp": [self _getTimestamp],
@@ -47,6 +47,33 @@
 }
 
 - (void)authenticate:(NSMutableURLRequest *)request {
+}
+
+- (NSString *)getAuthorizationHeaderForRequest:(NSMutableURLRequest *)request {
+	NSMutableString *header = [NSMutableString string];
+
+	[header appendString:@"OAuth "];
+
+	NSArray *sortedKeys = [[self.oauthParams allKeys]
+	   sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+
+	for (NSString *key in sortedKeys) {
+		[header appendFormat:@"%@=\"%@\", ", key, self.oauthParams[key]];
+	}
+
+	NSString *method = request.HTTPMethod;
+	NSString *URL = [[request.URL absoluteString]
+		componentsSeparatedByString:@"?"][0];
+
+	NSMutableDictionary *params = [self _getRequestParams:[request.URL query]];
+	[params addEntriesFromDictionary:self.oauthParams];
+
+	NSString *signature = [self getSignatureWithMethod:method URL:URL
+		params:params];
+
+	[header appendFormat:@"oauth_signature=\"%@\"", [self _escape:signature]];
+
+	return header;
 }
 
 - (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
@@ -118,6 +145,21 @@
 	CFRelease(uuid);
 
 	return (NSString *)CFBridgingRelease(string);
+}
+
+- (NSMutableDictionary *)_getRequestParams:(NSString *)query {
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	NSArray *paramsArray = [query componentsSeparatedByString:@"&"];
+
+	for (NSString *param in paramsArray) {
+		NSArray *pair = [param componentsSeparatedByString:@"="];
+
+		if ([pair count] == 2) {
+			params[pair[0]] = pair[1];
+		}
+	}
+
+	return params;
 }
 
 - (NSString *)_getTimestamp {
