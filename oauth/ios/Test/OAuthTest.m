@@ -16,6 +16,7 @@
 
 #import "LRGroupService_v62.h"
 #import "LROAuth+Testable.h"
+#import "LRValidator.h"
 
 /**
  * @author Bruno Farache
@@ -26,11 +27,20 @@
 @implementation OAuthTest
 
 - (void)testGetUserSites {
-	LROAuth *oauth = [[LROAuth alloc]
-		initWithConsumerKey:@"abb49e76-aafb-405a-8619-76be986e6752"
-		consumerSecret:@"525041f5b3f8f248643c31dd384637ed"
-		token:@"6bde7d8d5868f6e2d77f57634b5e5eb4"
-		tokenSecret:@"88b33c89effd1819f4a1e940f63d5454"];
+	NSString *consumerKey = self.settings[@"oauth_consumer_key"];
+	NSString *consumerSecret = self.settings[@"oauth_consumer_secret"];
+	NSString *token = self.settings[@"oauth_token"];
+	NSString *tokenSecret = self.settings[@"oauth_token_secret"];
+
+	if ([LRValidator isEmpty:consumerKey] ||
+		[LRValidator isEmpty:consumerSecret] || [LRValidator isEmpty:token] ||
+		[LRValidator isEmpty:tokenSecret]) {
+
+		return;
+	}
+
+	LROAuth *oauth = [[LROAuth alloc] initWithConsumerKey:consumerKey
+		consumerSecret:consumerSecret token:token tokenSecret:tokenSecret];
 
 	LRSession *session = [[LRSession alloc]
 		initWithServer:@"http://localhost:8080" authentication:oauth];

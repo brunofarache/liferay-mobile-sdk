@@ -12,5 +12,13 @@
 	<integer>10184</integer>
 	<key>portalVersion</key>
 	<integer>6201</integer>
+	<key>oauth_consumer_key</key>
+	<string>abb49e76-aafb-405a-8619-76be986e6752</string>
+	<key>oauth_consumer_secret</key>
+	<string>525041f5b3f8f248643c31dd384637ed</string>
+	<key>oauth_token</key>
+	<string>6bde7d8d5868f6e2d77f57634b5e5eb4</string>
+	<key>oauth_token_secret</key>
+	<string>88b33c89effd1819f4a1e940f63d5454</string>
 </dict>
 </plist>
