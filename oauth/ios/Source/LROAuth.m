@@ -65,62 +65,12 @@
 	NSMutableDictionary *params = [self _getRequestParams:[request.URL query]];
 	[params addEntriesFromDictionary:self.oauthParams];
 
-	NSString *signature = [self getSignatureWithMethod:method URL:URL
+	NSString *signature = [self _getSignatureWithMethod:method URL:URL
 		params:params];
 
 	[header appendFormat:@"oauth_signature=\"%@\"", [self _escape:signature]];
 
 	[request setValue:header forHTTPHeaderField:@"Authorization"];
-}
-
-- (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
-		params:(NSDictionary *)params {
-
-	NSArray *sortedKeys = [[params allKeys]
-		sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-
-	NSMutableString *paramsString = [NSMutableString string];
-
-	for (int i = 0; i < [sortedKeys count]; i++) {
-		if (i > 0) {
-			[paramsString appendString:@"&"];
-		}
-
-		NSString *key = sortedKeys[i];
-		[paramsString appendFormat:@"%@=%@", key, params[key]];
-	}
-
-	NSString *signatureBase = [NSString stringWithFormat:@"%@&%@&%@",
-		method, [self _escape:URL], [self _escape:paramsString]];
-
-	return signatureBase;
-}
-
-- (NSString *)getSignatureWithMethod:(NSString *)method URL:(NSString *)URL
-		params:(NSDictionary *)params {
-
-	NSString *signatureBase = [self getSignatureBaseWithMethod:method URL:URL
-		params:params];
-
-	NSData *signatureBaseData = [signatureBase
-		dataUsingEncoding:NSUTF8StringEncoding];
-
-	NSString *secret = [NSString stringWithFormat:@"%@&%@",
-		self.consumerSecret, self.tokenSecret];
-
-	NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
-
-	NSMutableData *digest = [NSMutableData
-		dataWithLength:CC_SHA1_DIGEST_LENGTH];
-
-	CCHmac(
-		kCCHmacAlgSHA1, secretData.bytes, secretData.length,
-		signatureBaseData.bytes, signatureBaseData.length, digest.mutableBytes);
-
-	NSDataBase64EncodingOptions options =
-		NSDataBase64Encoding76CharacterLineLength;
-
-	return [digest base64EncodedStringWithOptions:options];
 }
 
 - (NSString *)_escape:(NSString *)string {
@@ -157,6 +107,56 @@
 	}
 
 	return params;
+}
+
+- (NSString *)_getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
+		params:(NSDictionary *)params {
+
+	NSArray *sortedKeys = [[params allKeys]
+		sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+
+	NSMutableString *paramsString = [NSMutableString string];
+
+	for (int i = 0; i < [sortedKeys count]; i++) {
+		if (i > 0) {
+			[paramsString appendString:@"&"];
+		}
+
+		NSString *key = sortedKeys[i];
+		[paramsString appendFormat:@"%@=%@", key, params[key]];
+	}
+
+	NSString *signatureBase = [NSString stringWithFormat:@"%@&%@&%@",
+		method, [self _escape:URL], [self _escape:paramsString]];
+
+	return signatureBase;
+}
+
+- (NSString *)_getSignatureWithMethod:(NSString *)method URL:(NSString *)URL
+		params:(NSDictionary *)params {
+
+	NSString *signatureBase = [self _getSignatureBaseWithMethod:method URL:URL
+		params:params];
+
+	NSData *signatureBaseData = [signatureBase
+		dataUsingEncoding:NSUTF8StringEncoding];
+
+	NSString *secret = [NSString stringWithFormat:@"%@&%@",
+		self.consumerSecret, self.tokenSecret];
+
+	NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
+
+	NSMutableData *digest = [NSMutableData
+		dataWithLength:CC_SHA1_DIGEST_LENGTH];
+
+	CCHmac(
+		kCCHmacAlgSHA1, secretData.bytes, secretData.length,
+		signatureBaseData.bytes, signatureBaseData.length, digest.mutableBytes);
+
+	NSDataBase64EncodingOptions options =
+		NSDataBase64Encoding76CharacterLineLength;
+
+	return [digest base64EncodedStringWithOptions:options];
 }
 
 - (NSString *)_getTimestamp {

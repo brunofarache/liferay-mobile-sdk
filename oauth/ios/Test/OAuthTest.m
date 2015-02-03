@@ -15,7 +15,7 @@
 #import "BaseTest.h"
 
 #import "LRGroupService_v62.h"
-#import "LROAuth.h"
+#import "LROAuth+Testable.h"
 
 /**
  * @author Bruno Farache
@@ -98,7 +98,7 @@
 	params[@"file"] = @"vacation.jpg";
 	params[@"size"] = @"original";
 
-	NSString *signatureBase = [oauth getSignatureBaseWithMethod:method URL:URL
+	NSString *signatureBase = [oauth _getSignatureBaseWithMethod:method URL:URL
 		params:params];
 
 	XCTAssertEqualObjects(
@@ -113,7 +113,7 @@
 			"%26oauth_version%3D1.0" \
 			"%26size%3Doriginal");
 
-	NSString *signature = [oauth getSignatureWithMethod:method URL:URL
+	NSString *signature = [oauth _getSignatureWithMethod:method URL:URL
 		params:params];
 
 	XCTAssertEqualObjects(signature, @"tR3+Ty81lMeYAr/Fid0kMTYa/WM=");

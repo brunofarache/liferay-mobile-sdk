@@ -450,6 +450,7 @@
 		CCCE59701A800D8C00DAC117 /* OAuthTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthTest.m; sourceTree = "<group>"; };
 		CCCE59781A80FE2B00DAC117 /* LROAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuth.h; sourceTree = "<group>"; };
 		CCCE59791A80FE2B00DAC117 /* LROAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LROAuth.m; sourceTree = "<group>"; };
+		CCCE597F1A814C3F00DAC117 /* LROAuth+Testable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LROAuth+Testable.h"; sourceTree = "<group>"; };
 		CCD60E10191820BE00935937 /* LRJSONObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LRJSONObjectWrapper.h; sourceTree = "<group>"; };
 		CCD60E11191820BE00935937 /* LRJSONObjectWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LRJSONObjectWrapper.m; sourceTree = "<group>"; };
 		CCDCE0581A694BB20045023A /* BatchSessionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchSessionTest.m; sourceTree = "<group>"; };
@@ -1658,6 +1659,7 @@
 		CCCE596F1A800D8C00DAC117 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				CCCE597F1A814C3F00DAC117 /* LROAuth+Testable.h */,
 				CCCE59701A800D8C00DAC117 /* OAuthTest.m */,
 			);
 			path = Test;
