@@ -36,7 +36,6 @@
 
 	NSData *auth = [credentials dataUsingEncoding:NSUTF8StringEncoding];
 	NSString *encoded = [auth base64Encoding];
-
 	NSString *header = [NSString stringWithFormat:@"Basic %@", encoded];
 
 	[request setValue:header forHTTPHeaderField:@"Authorization"];
