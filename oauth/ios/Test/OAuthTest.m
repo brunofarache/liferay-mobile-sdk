@@ -105,7 +105,7 @@
 	NSString *URL = @"http://photos.example.net/photos";
 
 	NSMutableDictionary *params = [NSMutableDictionary
-		dictionaryWithDictionary:config.oauthParams];
+		dictionaryWithDictionary:config.params];
 
 	params[@"oauth_timestamp"] = @"1191242096";
 	params[@"oauth_nonce"] = @"kllo9940pd9333jh";

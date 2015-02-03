@@ -37,7 +37,7 @@
 
 	[header appendString:@"OAuth "];
 
-	NSDictionary *oauthParams = self.config.oauthParams;
+	NSDictionary *oauthParams = self.config.params;
 
 	NSArray *sortedKeys = [[oauthParams allKeys]
 		sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];

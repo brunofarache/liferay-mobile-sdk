@@ -20,7 +20,24 @@
 @implementation LROAuthConfig
 
 - (id)initWithConsumerKey:(NSString *)consumerKey
+		consumerSecret:(NSString *)consumerSecret
+		callbackURL:(NSString *)callbackURL {
+
+	return [self initWithConsumerKey:consumerKey consumerSecret:consumerSecret
+		token:nil tokenSecret:nil];
+}
+
+- (id)initWithConsumerKey:(NSString *)consumerKey
 		consumerSecret:(NSString *)consumerSecret token:(NSString *)token
+		tokenSecret:(NSString *)tokenSecret {
+
+	return  [self initWithConsumerKey:consumerKey consumerSecret:consumerSecret
+		callbackURL:nil token:token tokenSecret:tokenSecret];
+}
+
+- (id)initWithConsumerKey:(NSString *)consumerKey
+		consumerSecret:(NSString *)consumerSecret
+		callbackURL:(NSString *)callbackURL token:(NSString *)token
 		tokenSecret:(NSString *)tokenSecret {
 
 	self = [super init];
@@ -28,6 +45,7 @@
 	if (self) {
 		self.consumerKey = consumerKey;
 		self.consumerSecret = consumerSecret;
+		self.callbackURL = callbackURL;
 		self.token = token;
 		self.tokenSecret = tokenSecret ? : @"";
 	}
@@ -35,18 +53,29 @@
 	return self;
 }
 
-- (NSDictionary *)oauthParams {
+- (NSDictionary *)params {
 	NSString *nonce = self.nonce ? : [self _generateNonce];
 	NSString *timestamp = self.timestamp ? : [self _generateTimestamp];
 
-	return @{
-		@"oauth_consumer_key": self.consumerKey,
-		@"oauth_nonce": nonce,
-		@"oauth_timestamp": timestamp,
-		@"oauth_version": @"1.0",
-		@"oauth_signature_method": @"HMAC-SHA1",
-		@"oauth_token": self.token
-	};
+	NSMutableDictionary *params = [NSMutableDictionary
+	   dictionaryWithDictionary:@{
+			@"oauth_consumer_key": self.consumerKey,
+			@"oauth_nonce": nonce,
+			@"oauth_timestamp": timestamp,
+			@"oauth_version": @"1.0",
+			@"oauth_signature_method": @"HMAC-SHA1"
+		}
+	];
+
+	if (self.callbackURL) {
+		params[@"oauth_callback"] = self.callbackURL;
+	}
+
+	if (self.token) {
+		params[@"oauth_token"] = self.token;
+	}
+
+	return params;
 }
 
 - (NSString *)_generateNonce {

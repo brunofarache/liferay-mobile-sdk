@@ -17,13 +17,18 @@
  */
 @interface LROAuthConfig : NSObject
 
+@property (nonatomic, strong) NSString *callbackURL;
 @property (nonatomic, strong) NSString *consumerKey;
 @property (nonatomic, strong) NSString *consumerSecret;
 @property (nonatomic, strong) NSString *nonce;
-@property (readonly, nonatomic, strong) NSDictionary *oauthParams;
+@property (readonly, nonatomic, strong) NSDictionary *params;
 @property (nonatomic, strong) NSString *timestamp;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *tokenSecret;
+
+- (id)initWithConsumerKey:(NSString *)consumerKey
+	consumerSecret:(NSString *)consumerSecret
+	callbackURL:(NSString *)callbackURL;
 
 - (id)initWithConsumerKey:(NSString *)consumerKey
 	consumerSecret:(NSString *)consumerSecret token:(NSString *)token
