@@ -47,9 +47,6 @@
 }
 
 - (void)authenticate:(NSMutableURLRequest *)request {
-}
-
-- (NSString *)getAuthorizationHeaderForRequest:(NSMutableURLRequest *)request {
 	NSMutableString *header = [NSMutableString string];
 
 	[header appendString:@"OAuth "];
@@ -73,7 +70,7 @@
 
 	[header appendFormat:@"oauth_signature=\"%@\"", [self _escape:signature]];
 
-	return header;
+	[request setValue:header forHTTPHeaderField:@"Authorization"];
 }
 
 - (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL

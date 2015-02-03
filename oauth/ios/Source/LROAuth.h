@@ -29,8 +29,6 @@
 	consumerSecret:(NSString *)consumerSecret token:(NSString *)token
 	tokenSecret:(NSString *)tokenSecret;
 
-- (NSString *)getAuthorizationHeaderForRequest:(NSMutableURLRequest *)request;
-
 - (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
 	params:(NSDictionary *)params;
 

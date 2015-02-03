@@ -16,7 +16,6 @@
 
 #import "LRGroupService_v62.h"
 #import "LROAuth.h"
-#import "OAuth.h"
 
 /**
  * @author Bruno Farache
@@ -26,8 +25,12 @@
 
 @implementation OAuthTest
 
-- (void)testOAuth {
-	OAuth *oauth = [[OAuth alloc] init];
+- (void)testGetUserSites {
+	LROAuth *oauth = [[LROAuth alloc]
+		initWithConsumerKey:@"abb49e76-aafb-405a-8619-76be986e6752"
+		consumerSecret:@"525041f5b3f8f248643c31dd384637ed"
+		token:@"6bde7d8d5868f6e2d77f57634b5e5eb4"
+		tokenSecret:@"88b33c89effd1819f4a1e940f63d5454"];
 
 	LRSession *session = [[LRSession alloc]
 		initWithServer:@"http://localhost:8080" authentication:oauth];
@@ -36,10 +39,16 @@
 		initWithSession:session];
 
 	NSError *error;
-
 	NSArray *sites = [service getUserSites:&error];
 
-	NSLog(@"%@", sites);
+	XCTAssertNil(error);
+	XCTAssertTrue([sites count] > 0);
+
+	NSDictionary *site = sites[0];
+	XCTAssertEqualObjects(@"/test", site[@"friendlyURL"]);
+
+	site = sites[1];
+	XCTAssertEqualObjects(@"/guest", site[@"friendlyURL"]);
 }
 
 - (void)testHeader {
@@ -59,7 +68,8 @@
 		"file=vacation.jpg&size=original"];
 
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-	NSString *header = [oauth getAuthorizationHeaderForRequest:request];
+	[oauth authenticate:request];
+	NSString *header = [request valueForHTTPHeaderField:@"Authorization"];
 
 	XCTAssertEqualObjects(
 		header,
