@@ -42,9 +42,13 @@
 	NSLog(@"%@", sites);
 }
 
-- (void)testSignatureBase {
+- (void)testSignature {
 	LROAuth *oauth = [[LROAuth alloc] initWithConsumerKey:@"dpf43f3p2l4k3l03"
-		consumerSecret:nil token:@"nnch734d00sl2jdk" tokenSecret:nil];
+		consumerSecret:@"kd94hf93k423kf44" token:@"nnch734d00sl2jdk"
+		tokenSecret:@"pfkkdhi9sl3r4s00"];
+
+	NSString *method = @"GET";
+	NSString *URL = @"http://photos.example.net/photos";
 
 	NSMutableDictionary *params = [NSMutableDictionary
 		dictionaryWithDictionary:oauth.params];
@@ -54,8 +58,8 @@
 	params[@"file"] = @"vacation.jpg";
 	params[@"size"] = @"original";
 
-	NSString *signatureBase = [oauth signatureBase:@"GET"
-		url:@"http://photos.example.net/photos" params:params];
+	NSString *signatureBase = [oauth getSignatureBaseWithMethod:method URL:URL
+		params:params];
 
 	XCTAssertEqualObjects(
 		signatureBase,
@@ -68,6 +72,11 @@
 			"%26oauth_token%3Dnnch734d00sl2jdk" \
 			"%26oauth_version%3D1.0" \
 			"%26size%3Doriginal");
+
+	NSString *signature = [oauth getSignatureWithMethod:method URL:URL
+		params:params];
+
+	XCTAssertEqualObjects(signature, @"tR3+Ty81lMeYAr/Fid0kMTYa/WM=");
 }
 
 @end

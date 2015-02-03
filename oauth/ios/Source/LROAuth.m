@@ -14,6 +14,8 @@
 
 #import "LROAuth.h"
 
+#import <CommonCrypto/CommonHMAC.h>
+
 /**
  * @author Bruno Farache
  */
@@ -39,9 +41,6 @@
 			@"oauth_signature_method": @"HMAC-SHA1",
 			@"oauth_token": self.token
 		};
-
-		self.secret = [NSString stringWithFormat:@"%@&%@",
-			self.consumerSecret, self.tokenSecret];
 	}
 
 	return self;
@@ -50,7 +49,7 @@
 - (void)authenticate:(NSMutableURLRequest *)request {
 }
 
-- (NSString *)signatureBase:(NSString *)method url:(NSString *)url
+- (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
 		params:(NSDictionary *)params {
 
 	NSArray *sortedKeys = [[params allKeys]
@@ -68,9 +67,36 @@
 	}
 
 	NSString *signatureBase = [NSString stringWithFormat:@"%@&%@&%@",
-		method, [self _escape:url], [self _escape:paramsString]];
+		method, [self _escape:URL], [self _escape:paramsString]];
 
 	return signatureBase;
+}
+
+- (NSString *)getSignatureWithMethod:(NSString *)method URL:(NSString *)URL
+		params:(NSDictionary *)params {
+
+	NSString *signatureBase = [self getSignatureBaseWithMethod:method URL:URL
+		params:params];
+
+	NSData *signatureBaseData = [signatureBase
+		dataUsingEncoding:NSUTF8StringEncoding];
+
+	NSString *secret = [NSString stringWithFormat:@"%@&%@",
+		self.consumerSecret, self.tokenSecret];
+
+	NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
+
+	NSMutableData *digest = [NSMutableData
+		dataWithLength:CC_SHA1_DIGEST_LENGTH];
+
+	CCHmac(
+		kCCHmacAlgSHA1, secretData.bytes, secretData.length,
+		signatureBaseData.bytes, signatureBaseData.length, digest.mutableBytes);
+
+	NSDataBase64EncodingOptions options =
+		NSDataBase64Encoding76CharacterLineLength;
+
+	return [digest base64EncodedStringWithOptions:options];
 }
 
 - (NSString *)_escape:(NSString *)string {

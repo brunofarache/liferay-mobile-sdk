@@ -22,7 +22,6 @@
 @property (nonatomic, strong) NSString *consumerKey;
 @property (nonatomic, strong) NSString *consumerSecret;
 @property (nonatomic, strong) NSDictionary *params;
-@property (nonatomic, strong) NSString *secret;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *tokenSecret;
 
@@ -30,7 +29,10 @@
 	consumerSecret:(NSString *)consumerSecret token:(NSString *)token
 	tokenSecret:(NSString *)tokenSecret;
 
-- (NSString *)signatureBase:(NSString *)method url:(NSString *)url
+- (NSString *)getSignatureBaseWithMethod:(NSString *)method URL:(NSString *)URL
+	params:(NSDictionary *)params;
+
+- (NSString *)getSignatureWithMethod:(NSString *)method URL:(NSString *)URL
 	params:(NSDictionary *)params;
 
 @end
