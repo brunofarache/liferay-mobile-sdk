@@ -66,13 +66,8 @@
 		consumerSecret:@"kd94hf93k423kf44" token:@"nnch734d00sl2jdk"
 		tokenSecret:@"pfkkdhi9sl3r4s00"];
 
-	NSMutableDictionary *params = [NSMutableDictionary
-		dictionaryWithDictionary:oauth.oauthParams];
-
-	params[@"oauth_timestamp"] = @"1191242096";
-	params[@"oauth_nonce"] = @"kllo9940pd9333jh";
-
-	oauth.oauthParams = params;
+	oauth.nonce = @"kllo9940pd9333jh";
+	oauth.timestamp = @"1191242096";
 
 	NSURL *URL = [NSURL URLWithString:@"http://photos.example.net/photos?" \
 		"file=vacation.jpg&size=original"];

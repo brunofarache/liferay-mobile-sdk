@@ -31,16 +31,7 @@
 		self.consumerKey = consumerKey;
 		self.consumerSecret = consumerSecret;
 		self.token = token;
-		self.tokenSecret = tokenSecret ? tokenSecret : @"";
-
-		self.oauthParams = @{
-			@"oauth_consumer_key": self.consumerKey,
-			@"oauth_nonce": [self _getNonce],
-			@"oauth_timestamp": [self _getTimestamp],
-			@"oauth_version": @"1.0",
-			@"oauth_signature_method": @"HMAC-SHA1",
-			@"oauth_token": self.token
-		};
+		self.tokenSecret = tokenSecret ? : @"";
 	}
 
 	return self;
@@ -51,11 +42,13 @@
 
 	[header appendString:@"OAuth "];
 
-	NSArray *sortedKeys = [[self.oauthParams allKeys]
-	   sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+	NSDictionary *oauthParams = self.oauthParams;
+
+	NSArray *sortedKeys = [[oauthParams allKeys]
+		sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 
 	for (NSString *key in sortedKeys) {
-		[header appendFormat:@"%@=\"%@\", ", key, self.oauthParams[key]];
+		[header appendFormat:@"%@=\"%@\", ", key, oauthParams[key]];
 	}
 
 	NSString *method = request.HTTPMethod;
@@ -63,7 +56,7 @@
 		componentsSeparatedByString:@"?"][0];
 
 	NSMutableDictionary *params = [self _getRequestParams:[request.URL query]];
-	[params addEntriesFromDictionary:self.oauthParams];
+	[params addEntriesFromDictionary:oauthParams];
 
 	NSString *signature = [self _getSignatureWithMethod:method URL:URL
 		params:params];
@@ -71,6 +64,20 @@
 	[header appendFormat:@"oauth_signature=\"%@\"", [self _escape:signature]];
 
 	[request setValue:header forHTTPHeaderField:@"Authorization"];
+}
+
+- (NSDictionary *)oauthParams {
+	NSString *nonce = self.nonce ? : [self _generateNonce];
+	NSString *timestamp = self.timestamp ? : [self _generateTimestamp];
+
+	return @{
+		@"oauth_consumer_key": self.consumerKey,
+		@"oauth_nonce": nonce,
+		@"oauth_timestamp": timestamp,
+		@"oauth_version": @"1.0",
+		@"oauth_signature_method": @"HMAC-SHA1",
+		@"oauth_token": self.token
+	};
 }
 
 - (NSString *)_escape:(NSString *)string {
@@ -86,12 +93,16 @@
 			CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
 }
 
-- (NSString *)_getNonce {
+- (NSString *)_generateNonce {
 	CFUUIDRef uuid = CFUUIDCreate(NULL);
 	CFStringRef string = CFUUIDCreateString(NULL, uuid);
 	CFRelease(uuid);
 
 	return (NSString *)CFBridgingRelease(string);
+}
+
+- (NSString *)_generateTimestamp {
+	return [@(floor([[NSDate date] timeIntervalSince1970])) stringValue];
 }
 
 - (NSMutableDictionary *)_getRequestParams:(NSString *)query {
@@ -157,10 +168,6 @@
 		NSDataBase64Encoding76CharacterLineLength;
 
 	return [digest base64EncodedStringWithOptions:options];
-}
-
-- (NSString *)_getTimestamp {
-	return [@(floor([[NSDate date] timeIntervalSince1970])) stringValue];
 }
 
 @end

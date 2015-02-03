@@ -21,7 +21,9 @@
 
 @property (nonatomic, strong) NSString *consumerKey;
 @property (nonatomic, strong) NSString *consumerSecret;
-@property (nonatomic, strong) NSDictionary *oauthParams;
+@property (readonly, nonatomic, strong) NSDictionary *oauthParams;
+@property (nonatomic, strong) NSString *nonce;
+@property (nonatomic, strong) NSString *timestamp;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *tokenSecret;
 
