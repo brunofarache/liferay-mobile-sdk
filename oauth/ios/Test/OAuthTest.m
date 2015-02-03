@@ -39,8 +39,11 @@
 		return;
 	}
 
-	LROAuth *oauth = [[LROAuth alloc] initWithConsumerKey:consumerKey
-		consumerSecret:consumerSecret token:token tokenSecret:tokenSecret];
+	LROAuthConfig *config = [[LROAuthConfig alloc]
+		initWithConsumerKey:consumerKey consumerSecret:consumerSecret
+		token:token tokenSecret:tokenSecret];
+
+	LROAuth *oauth = [[LROAuth alloc] initWithConfig:config];
 
 	LRSession *session = [[LRSession alloc]
 		initWithServer:@"http://localhost:8080" authentication:oauth];
@@ -62,12 +65,15 @@
 }
 
 - (void)testHeader {
-	LROAuth *oauth = [[LROAuth alloc] initWithConsumerKey:@"dpf43f3p2l4k3l03"
+	LROAuthConfig *config = [[LROAuthConfig alloc]
+		initWithConsumerKey:@"dpf43f3p2l4k3l03"
 		consumerSecret:@"kd94hf93k423kf44" token:@"nnch734d00sl2jdk"
 		tokenSecret:@"pfkkdhi9sl3r4s00"];
 
-	oauth.nonce = @"kllo9940pd9333jh";
-	oauth.timestamp = @"1191242096";
+	config.nonce = @"kllo9940pd9333jh";
+	config.timestamp = @"1191242096";
+
+	LROAuth *oauth = [[LROAuth alloc] initWithConfig:config];
 
 	NSURL *URL = [NSURL URLWithString:@"http://photos.example.net/photos?" \
 		"file=vacation.jpg&size=original"];
@@ -88,15 +94,18 @@
 }
 
 - (void)testSignature {
-	LROAuth *oauth = [[LROAuth alloc] initWithConsumerKey:@"dpf43f3p2l4k3l03"
+	LROAuthConfig *config = [[LROAuthConfig alloc]
+		initWithConsumerKey:@"dpf43f3p2l4k3l03"
 		consumerSecret:@"kd94hf93k423kf44" token:@"nnch734d00sl2jdk"
 		tokenSecret:@"pfkkdhi9sl3r4s00"];
+
+	LROAuth *oauth = [[LROAuth alloc] initWithConfig:config];
 
 	NSString *method = @"GET";
 	NSString *URL = @"http://photos.example.net/photos";
 
 	NSMutableDictionary *params = [NSMutableDictionary
-		dictionaryWithDictionary:oauth.oauthParams];
+		dictionaryWithDictionary:config.oauthParams];
 
 	params[@"oauth_timestamp"] = @"1191242096";
 	params[@"oauth_nonce"] = @"kllo9940pd9333jh";

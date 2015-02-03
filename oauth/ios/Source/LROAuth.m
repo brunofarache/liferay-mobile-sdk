@@ -21,17 +21,12 @@
  */
 @implementation LROAuth
 
-- (id)initWithConsumerKey:(NSString *)consumerKey
-		consumerSecret:(NSString *)consumerSecret token:(NSString *)token
-		tokenSecret:(NSString *)tokenSecret {
+- (id)initWithConfig:(LROAuthConfig *)config {
 
 	self = [super init];
 
 	if (self) {
-		self.consumerKey = consumerKey;
-		self.consumerSecret = consumerSecret;
-		self.token = token;
-		self.tokenSecret = tokenSecret ? : @"";
+		self.config = config;
 	}
 
 	return self;
@@ -42,7 +37,7 @@
 
 	[header appendString:@"OAuth "];
 
-	NSDictionary *oauthParams = self.oauthParams;
+	NSDictionary *oauthParams = self.config.oauthParams;
 
 	NSArray *sortedKeys = [[oauthParams allKeys]
 		sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
@@ -66,20 +61,6 @@
 	[request setValue:header forHTTPHeaderField:@"Authorization"];
 }
 
-- (NSDictionary *)oauthParams {
-	NSString *nonce = self.nonce ? : [self _generateNonce];
-	NSString *timestamp = self.timestamp ? : [self _generateTimestamp];
-
-	return @{
-		@"oauth_consumer_key": self.consumerKey,
-		@"oauth_nonce": nonce,
-		@"oauth_timestamp": timestamp,
-		@"oauth_version": @"1.0",
-		@"oauth_signature_method": @"HMAC-SHA1",
-		@"oauth_token": self.token
-	};
-}
-
 - (NSString *)_escape:(NSString *)string {
 	NSString *escape = @":/?&=;+!@#$()',*";
 	NSString *ignore = @"[].";
@@ -91,18 +72,6 @@
 			(__bridge CFStringRef)ignore,
 			(__bridge CFStringRef)escape,
 			CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
-}
-
-- (NSString *)_generateNonce {
-	CFUUIDRef uuid = CFUUIDCreate(NULL);
-	CFStringRef string = CFUUIDCreateString(NULL, uuid);
-	CFRelease(uuid);
-
-	return (NSString *)CFBridgingRelease(string);
-}
-
-- (NSString *)_generateTimestamp {
-	return [@(floor([[NSDate date] timeIntervalSince1970])) stringValue];
 }
 
 - (NSMutableDictionary *)_getRequestParams:(NSString *)query {
@@ -153,7 +122,7 @@
 		dataUsingEncoding:NSUTF8StringEncoding];
 
 	NSString *secret = [NSString stringWithFormat:@"%@&%@",
-		self.consumerSecret, self.tokenSecret];
+		self.config.consumerSecret, self.config.tokenSecret];
 
 	NSData *secretData = [secret dataUsingEncoding:NSUTF8StringEncoding];
 

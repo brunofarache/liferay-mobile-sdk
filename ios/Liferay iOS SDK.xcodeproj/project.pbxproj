@@ -150,6 +150,7 @@
 		CCC6A7B61A164BEB00ABB791 /* LRRedirectDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC6A7B51A164BEB00ABB791 /* LRRedirectDelegate.m */; };
 		CCCE59711A800D8C00DAC117 /* OAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59701A800D8C00DAC117 /* OAuthTest.m */; };
 		CCCE597B1A80FF6100DAC117 /* LROAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59791A80FE2B00DAC117 /* LROAuth.m */; };
+		CCCE59821A81657200DAC117 /* LROAuthConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59811A81657200DAC117 /* LROAuthConfig.m */; };
 		CCCF04E019182584005D1B22 /* LRJSONObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD60E11191820BE00935937 /* LRJSONObjectWrapper.m */; };
 		CCDCE0591A694BB20045023A /* BatchSessionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDCE0581A694BB20045023A /* BatchSessionTest.m */; };
 		CCE26C661A717EDB0010176D /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE26C651A717EDB0010176D /* PushTest.m */; };
@@ -451,6 +452,8 @@
 		CCCE59781A80FE2B00DAC117 /* LROAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuth.h; sourceTree = "<group>"; };
 		CCCE59791A80FE2B00DAC117 /* LROAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LROAuth.m; sourceTree = "<group>"; };
 		CCCE597F1A814C3F00DAC117 /* LROAuth+Testable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LROAuth+Testable.h"; sourceTree = "<group>"; };
+		CCCE59801A81657200DAC117 /* LROAuthConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuthConfig.h; sourceTree = "<group>"; };
+		CCCE59811A81657200DAC117 /* LROAuthConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LROAuthConfig.m; sourceTree = "<group>"; };
 		CCD60E10191820BE00935937 /* LRJSONObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LRJSONObjectWrapper.h; sourceTree = "<group>"; };
 		CCD60E11191820BE00935937 /* LRJSONObjectWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LRJSONObjectWrapper.m; sourceTree = "<group>"; };
 		CCDCE0581A694BB20045023A /* BatchSessionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchSessionTest.m; sourceTree = "<group>"; };
@@ -1652,6 +1655,8 @@
 			children = (
 				CCCE59781A80FE2B00DAC117 /* LROAuth.h */,
 				CCCE59791A80FE2B00DAC117 /* LROAuth.m */,
+				CCCE59801A81657200DAC117 /* LROAuthConfig.h */,
+				CCCE59811A81657200DAC117 /* LROAuthConfig.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -2018,6 +2023,7 @@
 				CC03FCB218ED7DCD00F3F16C /* LRAssetVocabularyService_v62.m in Sources */,
 				CC03FCB018ED7DCD00F3F16C /* LRAssetTagService_v62.m in Sources */,
 				CC2E77E31A3769A9001890A9 /* FileUploadTest.m in Sources */,
+				CCCE59821A81657200DAC117 /* LROAuthConfig.m in Sources */,
 				CCABA086197D544B00A9F8B0 /* LRError.m in Sources */,
 				CC03FD0818ED7DCD00F3F16C /* LRWikiPageService_v62.m in Sources */,
 				CC1C897919080708004D3C4C /* TRVSMonitor.m in Sources */,

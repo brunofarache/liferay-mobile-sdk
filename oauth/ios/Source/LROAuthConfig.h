@@ -12,16 +12,21 @@
  * details.
  */
 
-#import "LRAuthentication.h"
-#import "LROAuthConfig.h"
-
 /**
  * @author Bruno Farache
  */
-@interface LROAuth : NSObject <LRAuthentication>
+@interface LROAuthConfig : NSObject
 
-@property (nonatomic, strong) LROAuthConfig *config;
+@property (nonatomic, strong) NSString *consumerKey;
+@property (nonatomic, strong) NSString *consumerSecret;
+@property (nonatomic, strong) NSString *nonce;
+@property (readonly, nonatomic, strong) NSDictionary *oauthParams;
+@property (nonatomic, strong) NSString *timestamp;
+@property (nonatomic, strong) NSString *token;
+@property (nonatomic, strong) NSString *tokenSecret;
 
-- (id)initWithConfig:(LROAuthConfig *)config;
+- (id)initWithConsumerKey:(NSString *)consumerKey
+	consumerSecret:(NSString *)consumerSecret token:(NSString *)token
+	tokenSecret:(NSString *)tokenSecret;
 
 @end
