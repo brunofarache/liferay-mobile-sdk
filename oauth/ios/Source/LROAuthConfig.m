@@ -14,6 +14,8 @@
 
 #import "LROAuthConfig.h"
 
+#import "LROAuth.h"
+
 /**
  * @author Bruno Farache
  */
@@ -24,7 +26,7 @@
 		callbackURL:(NSString *)callbackURL {
 
 	return [self initWithConsumerKey:consumerKey consumerSecret:consumerSecret
-		token:nil tokenSecret:nil];
+		callbackURL:callbackURL token:nil tokenSecret:nil];
 }
 
 - (id)initWithConsumerKey:(NSString *)consumerKey
@@ -68,7 +70,7 @@
 	];
 
 	if (self.callbackURL) {
-		params[@"oauth_callback"] = self.callbackURL;
+		params[@"oauth_callback"] = [LROAuth escape:self.callbackURL];
 	}
 
 	if (self.token) {

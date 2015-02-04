@@ -50,18 +50,20 @@
 	NSString *URL = [[request.URL absoluteString]
 		componentsSeparatedByString:@"?"][0];
 
-	NSMutableDictionary *params = [self _getRequestParams:[request.URL query]];
+	NSMutableDictionary *params = [LROAuth
+		extractRequestParams:[request.URL query]];
+
 	[params addEntriesFromDictionary:oauthParams];
 
 	NSString *signature = [self _getSignatureWithMethod:method URL:URL
 		params:params];
 
-	[header appendFormat:@"oauth_signature=\"%@\"", [self _escape:signature]];
+	[header appendFormat:@"oauth_signature=\"%@\"", [LROAuth escape:signature]];
 
 	[request setValue:header forHTTPHeaderField:@"Authorization"];
 }
 
-- (NSString *)_escape:(NSString *)string {
++ (NSString *)escape:(NSString *)string {
 	NSString *escape = @":/?&=;+!@#$()',*";
 	NSString *ignore = @"[].";
 
@@ -74,7 +76,7 @@
 			CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
 }
 
-- (NSMutableDictionary *)_getRequestParams:(NSString *)query {
++ (NSMutableDictionary *)extractRequestParams:(NSString *)query {
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	NSArray *paramsArray = [query componentsSeparatedByString:@"&"];
 
@@ -107,7 +109,7 @@
 	}
 
 	NSString *signatureBase = [NSString stringWithFormat:@"%@&%@&%@",
-		method, [self _escape:URL], [self _escape:paramsString]];
+		method, [LROAuth escape:URL], [LROAuth escape:paramsString]];
 
 	return signatureBase;
 }

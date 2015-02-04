@@ -151,6 +151,7 @@
 		CCCE59711A800D8C00DAC117 /* OAuthTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59701A800D8C00DAC117 /* OAuthTest.m */; };
 		CCCE597B1A80FF6100DAC117 /* LROAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59791A80FE2B00DAC117 /* LROAuth.m */; };
 		CCCE59821A81657200DAC117 /* LROAuthConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59811A81657200DAC117 /* LROAuthConfig.m */; };
+		CCCE59891A82AB8E00DAC117 /* LRRequestToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE59881A82AB8E00DAC117 /* LRRequestToken.m */; };
 		CCCF04E019182584005D1B22 /* LRJSONObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD60E11191820BE00935937 /* LRJSONObjectWrapper.m */; };
 		CCDCE0591A694BB20045023A /* BatchSessionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CCDCE0581A694BB20045023A /* BatchSessionTest.m */; };
 		CCE26C661A717EDB0010176D /* PushTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CCE26C651A717EDB0010176D /* PushTest.m */; };
@@ -454,6 +455,8 @@
 		CCCE597F1A814C3F00DAC117 /* LROAuth+Testable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LROAuth+Testable.h"; sourceTree = "<group>"; };
 		CCCE59801A81657200DAC117 /* LROAuthConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuthConfig.h; sourceTree = "<group>"; };
 		CCCE59811A81657200DAC117 /* LROAuthConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LROAuthConfig.m; sourceTree = "<group>"; };
+		CCCE59871A82AB8E00DAC117 /* LRRequestToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRRequestToken.h; sourceTree = "<group>"; };
+		CCCE59881A82AB8E00DAC117 /* LRRequestToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRRequestToken.m; sourceTree = "<group>"; };
 		CCD60E10191820BE00935937 /* LRJSONObjectWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LRJSONObjectWrapper.h; sourceTree = "<group>"; };
 		CCD60E11191820BE00935937 /* LRJSONObjectWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LRJSONObjectWrapper.m; sourceTree = "<group>"; };
 		CCDCE0581A694BB20045023A /* BatchSessionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchSessionTest.m; sourceTree = "<group>"; };
@@ -1653,6 +1656,7 @@
 		CCCE59681A7FFA2100DAC117 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				CCCE59861A82AB8E00DAC117 /* Flow */,
 				CCCE59781A80FE2B00DAC117 /* LROAuth.h */,
 				CCCE59791A80FE2B00DAC117 /* LROAuth.m */,
 				CCCE59801A81657200DAC117 /* LROAuthConfig.h */,
@@ -1668,6 +1672,15 @@
 				CCCE59701A800D8C00DAC117 /* OAuthTest.m */,
 			);
 			path = Test;
+			sourceTree = "<group>";
+		};
+		CCCE59861A82AB8E00DAC117 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				CCCE59871A82AB8E00DAC117 /* LRRequestToken.h */,
+				CCCE59881A82AB8E00DAC117 /* LRRequestToken.m */,
+			);
+			path = Flow;
 			sourceTree = "<group>";
 		};
 		CCE26C4B1A713ED90010176D /* Modules */ = {
@@ -1909,6 +1922,7 @@
 				CCDCE0591A694BB20045023A /* BatchSessionTest.m in Sources */,
 				CC03FCB418ED7DCD00F3F16C /* LRBlogsEntryService_v62.m in Sources */,
 				CC03FCE818ED7DCD00F3F16C /* LRPollsVoteService_v62.m in Sources */,
+				CCCE59891A82AB8E00DAC117 /* LRRequestToken.m in Sources */,
 				CC03FCC418ED7DCD00F3F16C /* LRDLFolderService_v62.m in Sources */,
 				CC03FCB918ED7DCD00F3F16C /* LRContactService_v62.m in Sources */,
 				CC03FCE118ED7DCD00F3F16C /* LROrganizationService_v62.m in Sources */,

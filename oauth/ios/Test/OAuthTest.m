@@ -16,7 +16,9 @@
 
 #import "LRGroupService_v62.h"
 #import "LROAuth+Testable.h"
+#import "LRRequestToken.h"
 #import "LRValidator.h"
+#import "TRVSMonitor.h"
 
 /**
  * @author Bruno Farache
@@ -91,6 +93,40 @@
 			"oauth_token=\"nnch734d00sl2jdk\", " \
 			"oauth_version=\"1.0\", " \
 			"oauth_signature=\"tR3%2BTy81lMeYAr%2FFid0kMTYa%2FWM%3D\"");
+}
+
+- (void)testRequestToken {
+	TRVSMonitor *monitor = [TRVSMonitor monitor];
+	__block NSString *URL;
+	__block NSError *error;
+
+	NSString *consumerKey = self.settings[@"oauth_consumer_key"];
+	NSString *consumerSecret = self.settings[@"oauth_consumer_secret"];
+
+	LRSession *session = [[LRSession alloc] initWithSession:self.session];
+
+	[session
+		onSuccess:^(id result) {
+			URL = result;
+			[monitor signal];
+		}
+		onFailure:^(NSError *e) {
+			error = e;
+			[monitor signal];
+		}
+	 ];
+
+	[LRRequestToken requestTokenWithSession:session consumerKey:consumerKey
+		consumerSecret:consumerSecret];
+
+	[monitor wait];
+
+	NSString *authorizationURL = [NSString
+		stringWithFormat:@"%@/c/portal/oauth/authorize?oauth_token=",
+		self.session.server];
+
+	XCTAssertNil(error);
+	XCTAssert([URL hasPrefix:authorizationURL]);
 }
 
 - (void)testSignature {
