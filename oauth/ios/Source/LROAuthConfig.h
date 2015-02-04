@@ -17,11 +17,14 @@
  */
 @interface LROAuthConfig : NSObject
 
+@property (nonatomic, strong) NSString *accessTokenURL;
+@property (nonatomic, strong) NSString *authorizeTokenURL;
 @property (nonatomic, strong) NSString *callbackURL;
 @property (nonatomic, strong) NSString *consumerKey;
 @property (nonatomic, strong) NSString *consumerSecret;
 @property (nonatomic, strong) NSString *nonce;
 @property (readonly, nonatomic, strong) NSDictionary *params;
+@property (nonatomic, strong) NSString *requestTokenURL;
 @property (nonatomic, strong) NSString *timestamp;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *tokenSecret;

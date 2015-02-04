@@ -45,9 +45,12 @@
 	self = [super init];
 
 	if (self) {
+		self.accessTokenURL = @"/c/portal/oauth/access_token";
+		self.authorizeTokenURL = @"/c/portal/oauth/authorize";
+		self.callbackURL = callbackURL;
 		self.consumerKey = consumerKey;
 		self.consumerSecret = consumerSecret;
-		self.callbackURL = callbackURL;
+		self.requestTokenURL = @"/c/portal/oauth/request_token";
 		self.token = token;
 		self.tokenSecret = tokenSecret ? : @"";
 	}

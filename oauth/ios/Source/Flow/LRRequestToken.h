@@ -14,13 +14,14 @@
 
 #import "LRSession.h"
 
+#import "LROAuthConfig.h"
+
 /**
  * @author Bruno Farache
  */
 @interface LRRequestToken : NSObject
 
 + (void)requestTokenWithSession:(LRSession *)session
-	consumerKey:(NSString *)consumerKey
-	consumerSecret:(NSString *)consumerSecret;
+	config:(LROAuthConfig *)config;
 
 @end

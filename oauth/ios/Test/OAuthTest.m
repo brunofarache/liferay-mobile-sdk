@@ -116,8 +116,11 @@
 		}
 	 ];
 
-	[LRRequestToken requestTokenWithSession:session consumerKey:consumerKey
-		consumerSecret:consumerSecret];
+	LROAuthConfig *config = [[LROAuthConfig alloc]
+		initWithConsumerKey:consumerKey consumerSecret:consumerSecret
+		callbackURL:@"http://callback"];
+
+	[LRRequestToken requestTokenWithSession:session config:config];
 
 	[monitor wait];
 

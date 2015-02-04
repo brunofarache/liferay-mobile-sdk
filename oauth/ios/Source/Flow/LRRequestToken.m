@@ -22,17 +22,12 @@
 @implementation LRRequestToken
 
 + (void)requestTokenWithSession:(LRSession *)session
-		consumerKey:(NSString *)consumerKey
-		consumerSecret:(NSString *)consumerSecret {
-
-	LROAuthConfig *config = [[LROAuthConfig alloc]
-		initWithConsumerKey:consumerKey consumerSecret:consumerSecret
-		callbackURL:@"http://callback"];
+		config:(LROAuthConfig *)config {
 
 	LROAuth *oauth = [[LROAuth alloc] initWithConfig:config];
 
 	NSString *URL = [NSString stringWithFormat:@"%@%@", session.server,
-		@"/c/portal/oauth/request_token"];
+		config.requestTokenURL];
 
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
 		initWithURL:[NSURL URLWithString:URL]];
@@ -51,7 +46,7 @@
 
 			NSString *authorizationURL = [NSString
 				stringWithFormat:@"%@%@?oauth_token=%@",
-				session.server, @"/c/portal/oauth/authorize",
+				session.server, config.authorizeTokenURL,
 				params[@"oauth_token"]];
 
 			[callback onSuccess:authorizationURL];
