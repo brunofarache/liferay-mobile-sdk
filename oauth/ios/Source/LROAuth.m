@@ -64,16 +64,13 @@
 }
 
 + (NSString *)escape:(NSString *)string {
-	NSString *escape = @":/?&=;+!@#$()',*";
-	NSString *ignore = @"[].";
+	CFStringRef escape = CFSTR(":/?&=;+!@#$()',*");
+	CFStringRef ignore = CFSTR("[].");
 
-	return (__bridge_transfer NSString *)
+	return CFBridgingRelease(
 		CFURLCreateStringByAddingPercentEscapes(
-			kCFAllocatorDefault,
-			(__bridge CFStringRef)string,
-			(__bridge CFStringRef)ignore,
-			(__bridge CFStringRef)escape,
-			CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+			kCFAllocatorDefault, (CFStringRef)string, ignore, escape,
+			CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
 }
 
 + (NSMutableDictionary *)extractRequestParams:(NSString *)query {
