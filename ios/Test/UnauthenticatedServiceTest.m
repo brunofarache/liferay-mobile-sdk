@@ -13,7 +13,9 @@
  */
 
 #import "BaseTest.h"
+#import "LRBasicAuthentication.h"
 #import "LRGroupService_v62.h"
+#import "TRVSMonitor.h"
 
 /**
  * @author Jose M. Navarro
@@ -33,8 +35,58 @@
 	NSError *error;
 	[service getUserSites:&error];
 
-	XCTAssertEqualObjects(@"Authenticated access required",
-		[error localizedDescription]);
+	XCTAssertNotNil(error);
+	XCTAssertEqualObjects(
+	  error.localizedDescription, @"Authenticated access required");
 }
+
+- (void)testSharedSessionId {
+	TRVSMonitor *monitor = [TRVSMonitor monitor];
+	__block NSArray *groups;
+	__block NSError *error;
+
+	LRSession *session = [[LRSession alloc] initWithSession:self.session];
+
+	[session
+		onSuccess:^(id result) {
+			groups = result;
+			[monitor signal];
+		}
+	 	onFailure:^(NSError *e) {
+			error = e;
+			[monitor signal];
+		}
+	 ];
+
+	LRGroupService_v62 *service = [[LRGroupService_v62 alloc]
+		initWithSession:session];
+
+	[service getUserSites:&error];
+	[monitor wait];
+
+	XCTAssertNil(error);
+	XCTAssertEqual(2, [groups count]);
+
+	session = [[LRSession alloc] initWithServer:self.session.server authentication:[[LRBasicAuthentication alloc] initWithUsername:@"bruno.farache@liferay.com" password:@"test"]];
+
+	[session
+		onSuccess:^(id result) {
+			groups = result;
+			[monitor signal];
+		}
+	 	onFailure:^(NSError *e) {
+			error = e;
+			[monitor signal];
+		}
+	 ];
+
+	service = [[LRGroupService_v62 alloc] initWithSession:session];
+	[service getUserSites:&error];
+	[monitor wait];
+
+	XCTAssertNil(error);
+	XCTAssertEqual(1, [groups count]);
+}
+
 
 @end
