@@ -15,6 +15,7 @@
 #import "BaseTest.h"
 #import "LRBasicAuthentication.h"
 #import "LRGroupService_v62.h"
+#import "LRUserService_v62.h"
 #import "TRVSMonitor.h"
 
 /**
@@ -88,5 +89,58 @@
 	XCTAssertEqual(1, [groups count]);
 }
 
+- (void)testGetUserByEmail {
+	TRVSMonitor *monitor = [TRVSMonitor monitor];
+	__block NSDictionary *user;
+	__block NSError *error;
+
+	LRSession *session = [[LRSession alloc] initWithSession:self.session];
+
+	[session
+		onSuccess:^(id result) {
+			user = result;
+			[monitor signal];
+		}
+	 onFailure:^(NSError *e) {
+			error = e;
+			[monitor signal];
+		}
+	 ];
+
+	LRUserService_v62 *service = [[LRUserService_v62 alloc]
+		initWithSession:session];
+
+	[service getUserByEmailAddressWithCompanyId:10157
+		emailAddress:@"test@liferay.com" error:&error];
+
+	[monitor wait];
+
+	XCTAssertNil(error);
+	XCTAssertEqualObjects(@"test@liferay.com", user[@"emailAddress"]);
+
+	session = [[LRSession alloc] initWithServer:self.session.server
+		authentication:[[LRBasicAuthentication alloc]
+		initWithUsername:@"bruno.farache@liferay.com" password:@"test"]];
+
+	[session
+		onSuccess:^(id result) {
+			user  = result;
+			[monitor signal];
+		}
+	 onFailure:^(NSError *e) {
+			error = e;
+			[monitor signal];
+		}
+	 ];
+
+	service = [[LRUserService_v62 alloc] initWithSession:session];
+
+	[service getUserByEmailAddressWithCompanyId:10157
+		emailAddress:@"test@liferay.com" error:&error];
+
+	[monitor wait];
+
+	XCTAssertNotNil(error);
+}
 
 @end
