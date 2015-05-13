@@ -14,8 +14,6 @@
 
 package com.liferay.mobile.android.service;
 
-import android.os.AsyncTask;
-
 import com.liferay.mobile.android.auth.Authentication;
 import com.liferay.mobile.android.http.HttpUtil;
 import com.liferay.mobile.android.task.ServiceAsyncTask;
@@ -23,8 +21,6 @@ import com.liferay.mobile.android.task.UploadAsyncTask;
 import com.liferay.mobile.android.task.callback.AsyncTaskCallback;
 
 import java.util.Iterator;
-
-import org.apache.http.entity.mime.content.InputStreamBody;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -126,22 +122,20 @@ public class SessionImpl implements Session {
 	}
 
 	@Override
-	public AsyncTask upload(JSONObject command) throws Exception {
-		if (callback == null) {
-			throw new IllegalStateException(
-				"Set a callback to the session before uploading files");
+	public JSONArray upload(JSONObject command) throws Exception {
+		if (!hasInputStreamBody(command)) {
+			return invoke(command);
 		}
 
-		if (!hasInputStreamBody(command)) {
-			invoke(command);
+		if (callback != null) {
+			UploadAsyncTask task = new UploadAsyncTask(this, callback);
+			task.execute(command);
 
 			return null;
 		}
-
-		UploadAsyncTask task = new UploadAsyncTask(this, callback);
-		task.execute(command);
-
-		return task;
+		else {
+			return HttpUtil.upload(this, command);
+		}
 	}
 
 	protected boolean hasInputStreamBody(JSONObject command)
@@ -159,7 +153,7 @@ public class SessionImpl implements Session {
 		while (keys.hasNext()) {
 			String key = keys.next();
 
-			if (params.get(key) instanceof InputStreamBody) {
+			if (params.get(key) instanceof InputStreamBodyWrapper) {
 				return true;
 			}
 		}
