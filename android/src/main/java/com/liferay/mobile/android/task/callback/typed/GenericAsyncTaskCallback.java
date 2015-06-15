@@ -26,7 +26,15 @@ public abstract class GenericAsyncTaskCallback<T>
 
 	@Override
 	public JSONArray inBackground(JSONArray jsonArray) throws Exception {
-		result = transform(jsonArray.get(0));
+
+		boolean singleRequest = jsonArray.length() == 1;
+
+		if (singleRequest) {
+			result = transform(jsonArray.get(0));
+		} else {
+			result = transform(jsonArray);
+		}
+
 		result = inBackground(result);
 
 		return null;
