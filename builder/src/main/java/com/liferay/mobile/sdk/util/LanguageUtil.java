@@ -16,6 +16,7 @@ package com.liferay.mobile.sdk.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.Properties;
 
 import org.apache.commons.lang.WordUtils;
