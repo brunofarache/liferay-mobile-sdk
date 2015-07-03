@@ -59,7 +59,7 @@
 		groupFriendlyURL:(NSString *)groupFriendlyURL
 		folderPath:(NSString *)folderPath fileTitle:(NSString *)fileTitle {
 
-	NSString *webdavPath = [NSString stringWithFormat:@"%@/%@", folderPath,
+	NSString *webdavPath = [NSString stringWithFormat:@"%@%@", folderPath,
 		fileTitle];
 
 	NSString *webdavPathEscaped = [LRHttpUtil
@@ -69,7 +69,7 @@
 	NSString *path = (portalversion < LR_VERSION_6_2) ? @"/api/secure" : @"";
 
 	return [NSString
-		stringWithFormat:@"%@%@/webdav%@/document_library%@",
+		stringWithFormat:@"%@%@/webdav%@/document_library/%@",
 		session.server, path, groupFriendlyURL, webdavPathEscaped];
 }
 
