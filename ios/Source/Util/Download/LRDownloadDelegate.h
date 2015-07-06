@@ -14,7 +14,8 @@
 
 #import "LRBasicAuthentication.h"
 
-typedef void (^LRDownloadProgress)(long long totalBytes, NSData *d, NSError *e);
+typedef void (^LRDownloadProgress)(long long totalBytes, NSData *data,
+	NSError *e);
 
 extern const int LR_DOWNLOAD_ERROR;
 extern const int LR_DOWNLOAD_FINISHED;

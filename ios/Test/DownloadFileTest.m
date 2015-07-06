@@ -39,7 +39,7 @@
 	[LRDownloadUtil downloadWebDAVFileWithSession:self.session
 		portalVersion:self.portalVersion groupFriendlyURL:@"/guest"
 		folderPath:@"" fileTitle:self.entry[@"title"] outputStream:outputStream
-		downloadProgress:^(long long totalBytes, NSData *d, NSError *e) {
+		downloadProgress:^(long long totalBytes, NSData *data, NSError *e) {
 			XCTAssertTrue([NSThread isMainThread]);
 
 			if (e) {
