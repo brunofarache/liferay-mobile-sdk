@@ -15,6 +15,7 @@
 #import "LRDownloadUtil.h"
 
 #import "LRHttpUtil.h"
+#import "LRPortalVersionUtil.h"
 
 /**
  * @author Bruno Farache
@@ -34,48 +35,57 @@
 	NSMutableURLRequest *request = [LRHttpUtil getRequestWithSession:session
 		URL:[NSURL URLWithString:URL]];
 
+	[auth authenticate:request];
+
 	return [[NSURLConnection alloc] initWithRequest:request delegate:delegate
 		startImmediately:YES];
 }
 
-+ (NSURLConnection *)downloadFileWithSession:(LRSession *)session
++ (NSURLConnection *)downloadWebDAVFileWithSession:(LRSession *)session
+		portalVersion:(NSInteger)portalVersion
 		groupFriendlyURL:(NSString *)groupFriendlyURL
 		folderPath:(NSString *)folderPath fileTitle:(NSString *)fileTitle
 		outputStream:(NSOutputStream *)outputStream
 		downloadProgress:(LRDownloadProgress)downloadProgress {
 
-	NSString *URL = [LRDownloadUtil getDownloadURLWithSession:session
-		groupFriendlyURL:groupFriendlyURL folderPath:folderPath
-		fileTitle:fileTitle];
+	NSString *URL = [LRDownloadUtil getWebDAVFileURLWithSession:session
+		portalVersion:portalVersion groupFriendlyURL:groupFriendlyURL
+		folderPath:folderPath fileTitle:fileTitle];
 
 	return [LRDownloadUtil downloadWithSession:session URL:URL
 		outputStream:outputStream downloadProgress:downloadProgress];
 }
 
-+ (NSString *)getDownloadURLWithSession:(LRSession *)session
++ (NSString *)getWebDAVFileURLWithSession:(LRSession *)session
+		portalVersion:(NSInteger)portalversion
 		groupFriendlyURL:(NSString *)groupFriendlyURL
 		folderPath:(NSString *)folderPath fileTitle:(NSString *)fileTitle {
 
-	NSString *webdavPath = [NSString stringWithFormat:@"%@/%@", folderPath,
+	NSString *webdavPath = [NSString stringWithFormat:@"%@%@", folderPath,
 		fileTitle];
 
 	NSString *webdavPathEscaped = [LRHttpUtil
 		escape:webdavPath include:@":?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"
 		ignore:@"/"];
 
+	NSString *path = (portalversion < LR_VERSION_6_2) ? @"/api/secure" : @"";
+
 	return [NSString
-		stringWithFormat:@"%@/webdav%@/document_library%@",
-		session.server, groupFriendlyURL, webdavPathEscaped];
+		stringWithFormat:@"%@%@/webdav%@/document_library/%@",
+		session.server, path, groupFriendlyURL, webdavPathEscaped];
 }
 
 + (LRBasicAuthentication *)_getAuthentication:(LRSession *)session {
 	id<LRAuthentication> authentication = session.authentication;
 
+	NSString *sessionAuthClazz = NSStringFromClass([authentication class]);
+	NSString *basicAuthClazz = NSStringFromClass([LRBasicAuthentication class]);
+
 	if (!authentication) {
 		[NSException raise:@"" format:@"Session authentication can't be null"];
 	}
 
-	if (![authentication isKindOfClass:[LRBasicAuthentication class]]) {
+	if (![sessionAuthClazz isEqualToString:basicAuthClazz]) {
 		[NSException raise:@"" format:@"Can't download if authentication " \
 			"implementation is not BasicAuthentication"];
 	}
