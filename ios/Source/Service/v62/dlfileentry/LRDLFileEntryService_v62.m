@@ -372,6 +372,25 @@
 	return (NSArray *)[self.session invoke:_command error:error];
 }
 
+- (NSArray *)getGroupFileEntriesWithGroupId:(long long)groupId userId:(long long)userId repositoryId:(long long)repositoryId rootFolderId:(long long)rootFolderId mimeTypes:(NSArray *)mimeTypes status:(int)status start:(int)start end:(int)end obc:(LRJSONObjectWrapper *)obc error:(NSError **)error {
+	NSMutableDictionary *_params = [NSMutableDictionary dictionaryWithDictionary:@{
+		@"groupId": @(groupId),
+		@"userId": @(userId),
+		@"repositoryId": @(repositoryId),
+		@"rootFolderId": @(rootFolderId),
+		@"mimeTypes": [self checkNull: mimeTypes],
+		@"status": @(status),
+		@"start": @(start),
+		@"end": @(end),
+	}];
+
+	[self mangleWrapperWithParams:_params name:@"obc" className:@"com.liferay.portal.kernel.util.OrderByComparator" wrapper:obc];
+
+	NSDictionary *_command = @{@"/dlfileentry/get-group-file-entries": _params};
+
+	return (NSArray *)[self.session invoke:_command error:error];
+}
+
 - (NSNumber *)getGroupFileEntriesCountWithGroupId:(long long)groupId userId:(long long)userId rootFolderId:(long long)rootFolderId error:(NSError **)error {
 	NSMutableDictionary *_params = [NSMutableDictionary dictionaryWithDictionary:@{
 		@"groupId": @(groupId),
@@ -388,6 +407,21 @@
 	NSMutableDictionary *_params = [NSMutableDictionary dictionaryWithDictionary:@{
 		@"groupId": @(groupId),
 		@"userId": @(userId),
+		@"rootFolderId": @(rootFolderId),
+		@"mimeTypes": [self checkNull: mimeTypes],
+		@"status": @(status)
+	}];
+
+	NSDictionary *_command = @{@"/dlfileentry/get-group-file-entries-count": _params};
+
+	return (NSNumber *)[self.session invoke:_command error:error];
+}
+
+- (NSNumber *)getGroupFileEntriesCountWithGroupId:(long long)groupId userId:(long long)userId repositoryId:(long long)repositoryId rootFolderId:(long long)rootFolderId mimeTypes:(NSArray *)mimeTypes status:(int)status error:(NSError **)error {
+	NSMutableDictionary *_params = [NSMutableDictionary dictionaryWithDictionary:@{
+		@"groupId": @(groupId),
+		@"userId": @(userId),
+		@"repositoryId": @(repositoryId),
 		@"rootFolderId": @(rootFolderId),
 		@"mimeTypes": [self checkNull: mimeTypes],
 		@"status": @(status)

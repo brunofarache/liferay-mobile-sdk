@@ -31,6 +31,8 @@
 - (NSDictionary *)getStructureWithGroupId:(long long)groupId classNameId:(long long)classNameId structureKey:(NSString *)structureKey includeGlobalStructures:(BOOL)includeGlobalStructures error:(NSError **)error;
 - (NSArray *)getStructuresWithGroupId:(long long)groupId error:(NSError **)error;
 - (NSArray *)getStructuresWithGroupIds:(NSArray *)groupIds error:(NSError **)error;
+- (NSArray *)getStructuresWithGroupIds:(NSArray *)groupIds classNameId:(long long)classNameId error:(NSError **)error;
+- (NSArray *)getStructuresWithGroupIds:(NSArray *)groupIds classNameId:(long long)classNameId start:(int)start end:(int)end error:(NSError **)error;
 - (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds name:(NSString *)name description:(NSString *)description storageType:(NSString *)storageType type:(int)type andOperator:(BOOL)andOperator start:(int)start end:(int)end orderByComparator:(LRJSONObjectWrapper *)orderByComparator error:(NSError **)error;
 - (NSArray *)searchWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds keywords:(NSString *)keywords start:(int)start end:(int)end orderByComparator:(LRJSONObjectWrapper *)orderByComparator error:(NSError **)error;
 - (NSNumber *)searchCountWithCompanyId:(long long)companyId groupIds:(NSArray *)groupIds classNameIds:(NSArray *)classNameIds keywords:(NSString *)keywords error:(NSError **)error;
