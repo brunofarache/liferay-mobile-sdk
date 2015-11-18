@@ -14,6 +14,7 @@
 
 #import "LRDownloadUtil.h"
 
+#import "LROAuth.h"
 #import "LRHttpUtil.h"
 #import "LRPortalVersionUtil.h"
 #import "LRValidator.h"
@@ -93,10 +94,13 @@
 
 	NSString *authClass = NSStringFromClass([authentication class]);
 	NSString *basicAuthClass = NSStringFromClass([LRBasicAuthentication class]);
+	NSString *oauthClass = NSStringFromClass([LROAuth class]);
 
-	if (![authClass isEqualToString:basicAuthClass]) {
+	if (![authClass isEqualToString:basicAuthClass] &&
+		![authClass isEqualToString:oauthClass] ) {
+		
 		[NSException raise:@"" format:@"Can't download if authentication " \
-			"implementation is not BasicAuthentication"];
+			"implementation is not BasicAuthentication or OAuthAuthentication"];
 	}
 
 	return (LRBasicAuthentication *)authentication;
